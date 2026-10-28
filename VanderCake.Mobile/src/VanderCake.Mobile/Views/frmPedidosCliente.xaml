@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<views:PaginaBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:VanderCake.Views" xmlns:models="clr-namespace:VanderCake.Models" x:Class="VanderCake.Views.frmPedidosCliente" x:Name="Pagina" Title="Pedidos do cliente" x:DataType="views:frmPedidosCliente">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Lista de Pedidos" Clicked="OnLista"/>
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,*,Auto" Padding="18,8,18,16" RowSpacing="10">
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{StaticResource Primary}"/>
+            <Label Text="{Binding Erro}" IsVisible="{Binding TemErro}" TextColor="#A61925" BackgroundColor="#FFF0F1" Padding="10"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" IsEnabled="{Binding Livre}">
+            <Grid RowDefinitions="Auto,Auto,*" RowSpacing="12">
+                <VerticalStackLayout Spacing="5">
+                    <Label x:Name="NomeLabel" Style="{StaticResource Heading}"/>
+                    <Label x:Name="DocumentoLabel" Style="{StaticResource MutedLabel}"/>
+                    <Label x:Name="EnderecoLabel" Style="{StaticResource MutedLabel}"/>
+                </VerticalStackLayout>
+                <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <Button x:Name="NovoPedidoButton" Text="Novo Pedido+" Clicked="OnNovo"/>
+                    <Button Grid.Column="1" Text="Atualizar" Style="{StaticResource Secondary}" Clicked="OnAtualizar"/>
+                </Grid>
+                <CollectionView x:Name="PedidosView" Grid.Row="2" SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <Label Text="Nenhum pedido encontrado para este cliente." Padding="16"/>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:PedidoResumo">
+                            <Border Style="{StaticResource Card}">
+                                <VerticalStackLayout Spacing="7">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Text="{Binding Pedido.Titulo}" FontFamily="OpenSansSemibold"/>
+                                        <Label Grid.Column="1" Text="{Binding Pedido.TotalTexto}" FontFamily="OpenSansSemibold"/>
+                                    </Grid>
+                                    <Label Text="{Binding SituacaoTexto}" TextColor="{StaticResource Primary}"/>
+                                    <Label Text="{Binding Pedido.DataTexto}" Style="{StaticResource MutedLabel}"/>
+                                    <Label Text="{Binding Pedido.ResumoItens}" MaxLines="3" LineBreakMode="TailTruncation"/>
+                                    <Button Text="Ver detalhes" Style="{StaticResource Secondary}" CommandParameter="{Binding .}" Clicked="OnDetalhes"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" IsEnabled="{Binding Livre}" Spacing="8">
+
+        </VerticalStackLayout>
+    </Grid>
+</views:PaginaBase>

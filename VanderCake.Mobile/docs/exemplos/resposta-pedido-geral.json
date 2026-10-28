@@ -1,0 +1,63 @@
+{
+    "id": 200,
+    "identificadorEnvio": "92eb1f5b-1394-4477-91d0-864c7add59bd",
+    "vendedorId": 1,
+    "dataHoraCriacao": "2026-10-22T16:00:00Z",
+    "dataHoraRecebimento": "2026-10-22T16:05:00Z",
+    "status": "AguardandoConfirmacao",
+    "motivoCancelamento": null,
+    "pedidos": [
+        {
+            "id": 2001,
+            "clienteId": 10,
+            "clienteNome": "Cliente de exemplo",
+            "dataHoraCriacao": "2026-10-22T16:00:00Z",
+            "condicaoPagamentoId": 3,
+            "condicaoPagamentoDescricao": "7/14/21 dias",
+            "status": "Pendente",
+            "valorTotalSolicitado": 100,
+            "valorTotalAtendido": null,
+            "itens": [
+                {
+                    "produtoId": 100,
+                    "nomeProduto": "Produto de exemplo",
+                    "quantidadeSolicitada": 10,
+                    "quantidadeAtendida": null,
+                    "precoUnitario": 10
+                }
+            ],
+            "parcelas": [
+                {
+                    "numeroParcela": 1,
+                    "diasAposConfirmacao": 7,
+                    "formaPagamentoId": 1,
+                    "formaPagamentoNome": "Pix",
+                    "valorPrevisto": 33.33,
+                    "valorFinal": null,
+                    "dataVencimento": null,
+                    "situacao": "Prevista"
+                },
+                {
+                    "numeroParcela": 2,
+                    "diasAposConfirmacao": 14,
+                    "formaPagamentoId": 2,
+                    "formaPagamentoNome": "Boleto bancário",
+                    "valorPrevisto": 33.33,
+                    "valorFinal": null,
+                    "dataVencimento": null,
+                    "situacao": "Prevista"
+                },
+                {
+                    "numeroParcela": 3,
+                    "diasAposConfirmacao": 21,
+                    "formaPagamentoId": 3,
+                    "formaPagamentoNome": "Dinheiro em espécie",
+                    "valorPrevisto": 33.34,
+                    "valorFinal": null,
+                    "dataVencimento": null,
+                    "situacao": "Prevista"
+                }
+            ]
+        }
+    ]
+}

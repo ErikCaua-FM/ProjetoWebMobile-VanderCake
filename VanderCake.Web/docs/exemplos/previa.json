@@ -1,0 +1,111 @@
+{
+  "tokenPrevia": "[1042,1,[{\"id\":2035,\"clienteId\":10,\"clienteNome\":\"Padaria Trigo & Cia\",\"dataHoraCriacao\":\"2026-10-23T13:24:00.000Z\",\"status\":\"Pendente\",\"condicaoPagamentoId\":3,\"condicaoPagamentoDescricao\":\"7/14/21 dias\",\"valorTotalSolicitadoCentavos\":105950,\"valorTotalAtendidoCentavos\":null,\"itens\":[{\"produtoId\":1,\"nomeProduto\":\"Farinha de trigo · 25 kg\",\"quantidadeSolicitada\":10,\"quantidadeAtendida\":null,\"precoUnitarioCentavos\":8950},{\"produtoId\":2,\"nomeProduto\":\"Chocolate meio amargo · 1 kg\",\"quantidadeSolicitada\":5,\"quantidadeAtendida\":null,\"precoUnitarioCentavos\":3290}],\"parcelas\":[{\"numeroParcela\":1,\"diasAposConfirmacao\":7,\"formaPagamentoId\":1,\"formaPagamentoNome\":\"Pix\",\"valorPrevistoCentavos\":35316,\"valorFinalCentavos\":null,\"dataVencimento\":null},{\"numeroParcela\":2,\"diasAposConfirmacao\":14,\"formaPagamentoId\":2,\"formaPagamentoNome\":\"Boleto bancário\",\"valorPrevistoCentavos\":35316,\"valorFinalCentavos\":null,\"dataVencimento\":null},{\"numeroParcela\":3,\"diasAposConfirmacao\":21,\"formaPagamentoId\":3,\"formaPagamentoNome\":\"Dinheiro em espécie\",\"valorPrevistoCentavos\":35318,\"valorFinalCentavos\":null,\"dataVencimento\":null}]},{\"id\":2036,\"clienteId\":11,\"clienteNome\":\"Confeitaria Doce Ponto\",\"dataHoraCriacao\":\"2026-10-23T13:24:00.000Z\",\"status\":\"Pendente\",\"condicaoPagamentoId\":2,\"condicaoPagamentoDescricao\":\"7/14 dias\",\"valorTotalSolicitadoCentavos\":63570,\"valorTotalAtendidoCentavos\":null,\"itens\":[{\"produtoId\":1,\"nomeProduto\":\"Farinha de trigo · 25 kg\",\"quantidadeSolicitada\":6,\"quantidadeAtendida\":null,\"precoUnitarioCentavos\":8950},{\"produtoId\":2,\"nomeProduto\":\"Chocolate meio amargo · 1 kg\",\"quantidadeSolicitada\":3,\"quantidadeAtendida\":null,\"precoUnitarioCentavos\":3290}],\"parcelas\":[{\"numeroParcela\":1,\"diasAposConfirmacao\":7,\"formaPagamentoId\":1,\"formaPagamentoNome\":\"Pix\",\"valorPrevistoCentavos\":31785,\"valorFinalCentavos\":null,\"dataVencimento\":null},{\"numeroParcela\":2,\"diasAposConfirmacao\":14,\"formaPagamentoId\":2,\"formaPagamentoNome\":\"Boleto bancário\",\"valorPrevistoCentavos\":31785,\"valorFinalCentavos\":null,\"dataVencimento\":null}]}],[[1,12,2],[2,7,2]]]",
+  "pedidos": [
+    {
+      "id": 2035,
+      "clienteId": 10,
+      "clienteNome": "Padaria Trigo & Cia",
+      "dataHoraCriacao": "2026-10-23T13:24:00.000Z",
+      "status": "Pendente",
+      "condicaoPagamentoId": 3,
+      "condicaoPagamentoDescricao": "7/14/21 dias",
+      "valorTotalSolicitadoCentavos": 105950,
+      "valorTotalAtendidoCentavos": 84760,
+      "itens": [
+        {
+          "produtoId": 1,
+          "nomeProduto": "Farinha de trigo · 25 kg",
+          "quantidadeSolicitada": 10,
+          "quantidadeAtendida": 8,
+          "precoUnitarioCentavos": 8950
+        },
+        {
+          "produtoId": 2,
+          "nomeProduto": "Chocolate meio amargo · 1 kg",
+          "quantidadeSolicitada": 5,
+          "quantidadeAtendida": 4,
+          "precoUnitarioCentavos": 3290
+        }
+      ],
+      "parcelas": [
+        {
+          "numeroParcela": 1,
+          "diasAposConfirmacao": 7,
+          "formaPagamentoId": 1,
+          "formaPagamentoNome": "Pix",
+          "valorPrevistoCentavos": 35316,
+          "valorFinalCentavos": 28253,
+          "dataVencimento": null
+        },
+        {
+          "numeroParcela": 2,
+          "diasAposConfirmacao": 14,
+          "formaPagamentoId": 2,
+          "formaPagamentoNome": "Boleto bancário",
+          "valorPrevistoCentavos": 35316,
+          "valorFinalCentavos": 28253,
+          "dataVencimento": null
+        },
+        {
+          "numeroParcela": 3,
+          "diasAposConfirmacao": 21,
+          "formaPagamentoId": 3,
+          "formaPagamentoNome": "Dinheiro em espécie",
+          "valorPrevistoCentavos": 35318,
+          "valorFinalCentavos": 28254,
+          "dataVencimento": null
+        }
+      ]
+    },
+    {
+      "id": 2036,
+      "clienteId": 11,
+      "clienteNome": "Confeitaria Doce Ponto",
+      "dataHoraCriacao": "2026-10-23T13:24:00.000Z",
+      "status": "Pendente",
+      "condicaoPagamentoId": 2,
+      "condicaoPagamentoDescricao": "7/14 dias",
+      "valorTotalSolicitadoCentavos": 63570,
+      "valorTotalAtendidoCentavos": 45670,
+      "itens": [
+        {
+          "produtoId": 1,
+          "nomeProduto": "Farinha de trigo · 25 kg",
+          "quantidadeSolicitada": 6,
+          "quantidadeAtendida": 4,
+          "precoUnitarioCentavos": 8950
+        },
+        {
+          "produtoId": 2,
+          "nomeProduto": "Chocolate meio amargo · 1 kg",
+          "quantidadeSolicitada": 3,
+          "quantidadeAtendida": 3,
+          "precoUnitarioCentavos": 3290
+        }
+      ],
+      "parcelas": [
+        {
+          "numeroParcela": 1,
+          "diasAposConfirmacao": 7,
+          "formaPagamentoId": 1,
+          "formaPagamentoNome": "Pix",
+          "valorPrevistoCentavos": 31785,
+          "valorFinalCentavos": 22835,
+          "dataVencimento": null
+        },
+        {
+          "numeroParcela": 2,
+          "diasAposConfirmacao": 14,
+          "formaPagamentoId": 2,
+          "formaPagamentoNome": "Boleto bancário",
+          "valorPrevistoCentavos": 31785,
+          "valorFinalCentavos": 22835,
+          "dataVencimento": null
+        }
+      ]
+    }
+  ],
+  "totalSolicitadoCentavos": 169520,
+  "totalAtendidoCentavos": 130430,
+  "unidadesCortadas": 5
+}

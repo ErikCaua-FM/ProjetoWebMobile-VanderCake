@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#EA1D2C">
+    <meta name="description" content="VanderCake: gestão de vendas, produtos e carteiras de clientes.">
+    <title>Pedidos pendentes | VanderCake</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/pendentes.js"></script>
+</head>
+<body >
+    <a class="pular" href="#principal">Pular para o conteúdo</a>
+    <header id="cabecalho" class="cabecalho"></header>
+    <main id="principal" class="container">
+        <a class="voltar" href="index.html">← Voltar ao painel</a>
+        <div class="apresentacao"><div><p class="sobretitulo">RECEBIDOS DOS VENDEDORES</p><h1>Pedidos pendentes</h1><p class="muted">Revise os pedidos de cada envio antes de confirmar a venda.</p></div><span class="ambiente" data-modo></span></div>
+        <p id="mensagem" class="mensagem" role="status" hidden></p>
+        <section class="card"><div class="card-cabecalho"><div><h2>Envios para conferir <span id="total" class="contador">0</span></h2><p class="muted">Cada envio reúne os pedidos dos clientes de um vendedor.</p></div><button id="atualizar" class="botao secundario pequeno">↻ Atualizar</button></div>
+        <div class="filtros"><div class="pesquisa"><label class="sr-only" for="pesquisa">Pesquisar pedidos pendentes</label><span class="lupa" aria-hidden="true"></span><input id="pesquisa" type="search" placeholder="Número do envio, vendedor ou cliente"></div></div>
+        <div class="tabela-container"><table><caption class="sr-only">Pedidos Gerais aguardando confirmação</caption><thead><tr><th>Pedido Geral</th><th>Vendedor</th><th>Clientes</th><th>Total solicitado</th><th>Situação</th><th></th></tr></thead><tbody id="lista-pendentes"></tbody></table></div>
+        <div id="vazio" class="vazio" hidden><h3>Tudo em dia por aqui</h3><p>Nenhum pedido pendente encontrado.</p></div></section>
+        <p class="atualizacao" id="atualizado-em"></p>
+    </main>
+    <footer class="rodape"><span>VanderCake <span class="muted">· Gestão comercial</span></span><span data-demo>Dados fictícios · Demonstração neste navegador</span></footer>
+    <noscript>Ative o JavaScript para utilizar o VanderCake.</noscript>
+</body>
+</html>

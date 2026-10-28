@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#EA1D2C">
+    <meta name="description" content="VanderCake: gestão de vendas, produtos e carteiras de clientes.">
+    <title>Visão geral | VanderCake</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/painel.js"></script>
+</head>
+<body >
+    <a class="pular" href="#principal">Pular para o conteúdo</a>
+    <header id="cabecalho" class="cabecalho"></header>
+    <main id="principal" class="container">
+        <div class="apresentacao"><div><p class="sobretitulo">PAINEL DA LOJA</p><h1>Sua loja, em dia<span class="cor-primaria">.</span></h1><p class="muted">Acompanhe suas vendas e cuide de cada detalhe.</p></div><div class="apresentacao-acoes"><span class="ambiente" data-modo>Demonstração local</span><button id="atualizar" class="botao secundario pequeno">↻ Atualizar</button></div></div>
+        <div class="estatisticas" id="estatisticas" aria-label="Resumo da loja"></div>
+        <p id="mensagem" class="mensagem" role="status" hidden></p>
+        <div class="painel-grid">
+        <section class="card painel-card" id="vendas" aria-labelledby="titulo-vendas">
+            <div class="card-cabecalho"><div><p class="sobretitulo">SEU MOVIMENTO</p><h2 id="titulo-vendas">Vendas <span id="total-vendas" class="contador">0</span></h2></div><button id="abrir-pendentes" class="botao contorno pequeno">Pendentes <span id="total-pendentes" class="numero-botao">0</span></button></div>
+            <div class="filtros"><div class="pesquisa"><label class="sr-only" for="pesquisa-vendas">Pesquisar vendas</label><span class="lupa" aria-hidden="true"></span><input id="pesquisa-vendas" type="search" placeholder="Pedido, cliente, vendedor ou status" autocomplete="off"></div>
+                <label class="sr-only" for="filtro-vendas">Situação da venda</label><select id="filtro-vendas" aria-label="Situação da venda"><option value="">Todos os status</option value="Confirmado">Confirmadas</option value="Cancelado">Canceladas</option><option value="NaoAtendido">Não atendidas</option></select>
+            </div>
+            <div class="tabela-container" tabindex="0" role="region" aria-label="Tabela de vendas"><table><caption class="sr-only">Vendas</caption><thead><tr><th scope="col">Pedido / venda</th><th scope="col">Cliente / vendedor</th><th scope="col">Valor</th><th scope="col">Status</th><th scope="col"></th></tr></thead><tbody id="lista-vendas"></tbody></table></div>
+            <p id="vazio-vendas" class="vazio" hidden>Nenhum registro encontrado.</p>
+            <div class="card-rodape"><span id="resumo-vendas">Carregando…</span><span class="dica-tabela">Pesquise para encontrar mais rápido</span></div>
+        </section>        <section class="card painel-card" id="produtos" aria-labelledby="titulo-produtos">
+            <div class="card-cabecalho"><div><p class="sobretitulo">SEU CATÁLOGO</p><h2 id="titulo-produtos">Produtos <span id="total-produtos" class="contador">0</span></h2></div><button data-novo="produto" class="botao pequeno">＋ Incluir</button></div>
+            <div class="filtros"><div class="pesquisa"><label class="sr-only" for="pesquisa-produtos">Pesquisar produtos</label><span class="lupa" aria-hidden="true"></span><input id="pesquisa-produtos" type="search" placeholder="Nome do produto ou categoria" autocomplete="off"></div>
+                
+            </div>
+            <div class="tabela-container" tabindex="0" role="region" aria-label="Tabela de produtos"><table><caption class="sr-only">Produtos</caption><thead><tr><th scope="col">Produto / categoria</th><th scope="col">Preço</th><th scope="col">Estoque</th><th scope="col">Ações</th></tr></thead><tbody id="lista-produtos"></tbody></table></div>
+            <p id="vazio-produtos" class="vazio" hidden>Nenhum registro encontrado.</p>
+            <div class="card-rodape"><span id="resumo-produtos">Carregando…</span><span class="dica-tabela">Pesquise para encontrar mais rápido</span></div>
+        </section>        <section class="card painel-card" id="vendedores" aria-labelledby="titulo-vendedores">
+            <div class="card-cabecalho"><div><p class="sobretitulo">SUA EQUIPE</p><h2 id="titulo-vendedores">Vendedores <span id="total-vendedores" class="contador">0</span></h2></div><button data-novo="vendedor" class="botao secundario pequeno">＋ Cadastrar</button></div>
+            <div class="filtros"><div class="pesquisa"><label class="sr-only" for="pesquisa-vendedores">Pesquisar vendedores</label><span class="lupa" aria-hidden="true"></span><input id="pesquisa-vendedores" type="search" placeholder="Nome, documento, e-mail ou cidade" autocomplete="off"></div>
+                
+            </div>
+            <div class="tabela-container" tabindex="0" role="region" aria-label="Tabela de vendedores"><table><caption class="sr-only">Vendedores</caption><thead><tr><th scope="col">ID / nome completo</th><th scope="col">Status</th><th scope="col">Ações</th></tr></thead><tbody id="lista-vendedores"></tbody></table></div>
+            <p id="vazio-vendedores" class="vazio" hidden>Nenhum registro encontrado.</p>
+            <div class="card-rodape"><span id="resumo-vendedores">Carregando…</span><span class="dica-tabela">Pesquise para encontrar mais rápido</span></div>
+        </section>        <section class="card painel-card" id="clientes" aria-labelledby="titulo-clientes">
+            <div class="card-cabecalho"><div><p class="sobretitulo">SUA CARTEIRA</p><h2 id="titulo-clientes">Clientes <span id="total-clientes" class="contador">0</span></h2></div><button data-novo="cliente" class="botao secundario pequeno">＋ Cadastrar</button></div>
+            <div class="filtros"><div class="pesquisa"><label class="sr-only" for="pesquisa-clientes">Pesquisar clientes</label><span class="lupa" aria-hidden="true"></span><input id="pesquisa-clientes" type="search" placeholder="Nome, documento, endereço ou vendedor" autocomplete="off"></div>
+                
+            </div>
+            <div class="tabela-container" tabindex="0" role="region" aria-label="Tabela de clientes"><table><caption class="sr-only">Clientes</caption><thead><tr><th scope="col">Nome / endereço</th><th scope="col">Vendedor</th><th scope="col">Ações</th></tr></thead><tbody id="lista-clientes"></tbody></table></div>
+            <p id="vazio-clientes" class="vazio" hidden>Nenhum registro encontrado.</p>
+            <div class="card-rodape"><span id="resumo-clientes">Carregando…</span><span class="dica-tabela">Pesquise para encontrar mais rápido</span></div>
+        </section>
+        </div>
+        <p class="atualizacao" id="atualizado-em" aria-live="polite"></p>
+    </main>
+    <footer class="rodape"><span>VanderCake <span class="muted">· Gestão comercial</span></span><span data-demo>Dados fictícios · Demonstração neste navegador</span></footer>
+    <noscript>Ative o JavaScript para utilizar o VanderCake.</noscript>
+</body>
+</html>

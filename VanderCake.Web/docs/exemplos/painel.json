@@ -1,0 +1,898 @@
+{
+  "schema": 1,
+  "revisao": 1,
+  "estados": [
+    {
+      "id": 1,
+      "nome": "Paraná",
+      "uf": "PR",
+      "versao": 1
+    },
+    {
+      "id": 2,
+      "nome": "Santa Catarina",
+      "uf": "SC",
+      "versao": 1
+    }
+  ],
+  "cidades": [
+    {
+      "id": 1,
+      "nome": "Foz do Iguaçu",
+      "estadoId": 1,
+      "versao": 1
+    },
+    {
+      "id": 2,
+      "nome": "Cascavel",
+      "estadoId": 1,
+      "versao": 1
+    },
+    {
+      "id": 3,
+      "nome": "Curitiba",
+      "estadoId": 1,
+      "versao": 1
+    },
+    {
+      "id": 4,
+      "nome": "Joinville",
+      "estadoId": 2,
+      "versao": 1
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nome": "Farinhas",
+      "ativo": true,
+      "versao": 1
+    },
+    {
+      "id": 2,
+      "nome": "Chocolates",
+      "ativo": true,
+      "versao": 1
+    },
+    {
+      "id": 3,
+      "nome": "Laticínios",
+      "ativo": true,
+      "versao": 1
+    },
+    {
+      "id": 4,
+      "nome": "Fermentos",
+      "ativo": true,
+      "versao": 1
+    },
+    {
+      "id": 5,
+      "nome": "Confeitaria",
+      "ativo": true,
+      "versao": 1
+    }
+  ],
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Farinha de trigo · 25 kg",
+      "categoriaId": 1,
+      "precoCentavos": 8950,
+      "estoque": 12,
+      "descricao": "Farinha especial para pães e massas.",
+      "ativo": true,
+      "versao": 2
+    },
+    {
+      "id": 2,
+      "nome": "Chocolate meio amargo · 1 kg",
+      "categoriaId": 2,
+      "precoCentavos": 3290,
+      "estoque": 7,
+      "descricao": "Cobertura para a rotina da confeitaria.",
+      "ativo": true,
+      "versao": 2
+    },
+    {
+      "id": 3,
+      "nome": "Creme de leite · 1 L",
+      "categoriaId": 3,
+      "precoCentavos": 1890,
+      "estoque": 24,
+      "descricao": "Creme culinário para doces e recheios.",
+      "ativo": true,
+      "versao": 2
+    },
+    {
+      "id": 4,
+      "nome": "Fermento biológico · 500 g",
+      "categoriaId": 4,
+      "precoCentavos": 1290,
+      "estoque": 45,
+      "descricao": "Fermento seco para panificação.",
+      "ativo": true,
+      "versao": 1
+    },
+    {
+      "id": 5,
+      "nome": "Açúcar de confeiteiro · 1 kg",
+      "categoriaId": 5,
+      "precoCentavos": 890,
+      "estoque": 30,
+      "descricao": "Açúcar fino para coberturas.",
+      "ativo": true,
+      "versao": 2
+    },
+    {
+      "id": 6,
+      "nome": "Granulado de chocolate · 1 kg",
+      "categoriaId": 5,
+      "precoCentavos": 2150,
+      "estoque": 22,
+      "descricao": "Finalização de bolos e doces.",
+      "ativo": true,
+      "versao": 1
+    }
+  ],
+  "vendedores": [
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "120",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 1,
+      "telefone": "45000000000",
+      "ativo": true,
+      "versao": 1,
+      "id": 1,
+      "nome": "Ana Martins",
+      "documento": "00000000001",
+      "email": "ana@exemplo.test"
+    },
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "120",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 2,
+      "telefone": "45000000000",
+      "ativo": true,
+      "versao": 1,
+      "id": 2,
+      "nome": "Rafael Costa",
+      "documento": "00000000002",
+      "email": "rafael@exemplo.test"
+    },
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "120",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 1,
+      "telefone": "45000000000",
+      "ativo": false,
+      "versao": 1,
+      "id": 3,
+      "nome": "Beatriz Lima",
+      "documento": "00000000003",
+      "email": "beatriz@exemplo.test"
+    }
+  ],
+  "clientes": [
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "120",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 1,
+      "telefone": "45000000000",
+      "ativo": true,
+      "versao": 1,
+      "id": 10,
+      "nome": "Padaria Trigo & Cia",
+      "documento": "00000000000010",
+      "email": "trigo@exemplo.test",
+      "vendedorId": 1
+    },
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "284",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 1,
+      "telefone": "45000000000",
+      "ativo": true,
+      "versao": 1,
+      "id": 11,
+      "nome": "Confeitaria Doce Ponto",
+      "documento": "00000000000011",
+      "email": "doceponto@exemplo.test",
+      "vendedorId": 1
+    },
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "120",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 2,
+      "telefone": "45000000000",
+      "ativo": true,
+      "versao": 1,
+      "id": 12,
+      "nome": "Padaria Bom Dia",
+      "documento": "00000000000012",
+      "email": "bomdia@exemplo.test",
+      "vendedorId": 2
+    },
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "120",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 2,
+      "telefone": "45000000000",
+      "ativo": true,
+      "versao": 1,
+      "id": 13,
+      "nome": "Ateliê de Bolos",
+      "documento": "00000000000013",
+      "email": "atelie@exemplo.test",
+      "vendedorId": 2
+    },
+    {
+      "rua": "Rua das Panificadoras",
+      "numero": "120",
+      "bairro": "Centro",
+      "cep": "85851000",
+      "cidadeId": 1,
+      "telefone": "45000000000",
+      "ativo": true,
+      "versao": 1,
+      "id": 14,
+      "nome": "Empório dos Pães",
+      "documento": "00000000000014",
+      "email": "emporio@exemplo.test",
+      "vendedorId": 1
+    }
+  ],
+  "condicoesPagamento": [
+    {
+      "id": 1,
+      "descricao": "À vista",
+      "dias": [
+        0
+      ]
+    },
+    {
+      "id": 2,
+      "descricao": "7/14 dias",
+      "dias": [
+        7,
+        14
+      ]
+    },
+    {
+      "id": 3,
+      "descricao": "7/14/21 dias",
+      "dias": [
+        7,
+        14,
+        21
+      ]
+    }
+  ],
+  "formasPagamento": [
+    {
+      "id": 1,
+      "descricao": "Pix"
+    },
+    {
+      "id": 2,
+      "descricao": "Boleto bancário"
+    },
+    {
+      "id": 3,
+      "descricao": "Dinheiro em espécie"
+    },
+    {
+      "id": 4,
+      "descricao": "Cartão de crédito"
+    },
+    {
+      "id": 5,
+      "descricao": "Cartão de débito"
+    }
+  ],
+  "pedidosGerais": [
+    {
+      "id": 1040,
+      "identificadorEnvio": "00000000-0000-4000-8000-000000001040",
+      "vendedorId": 1,
+      "vendedorNome": "Ana Martins",
+      "dataHoraRecebimento": "2026-10-21T14:24:00.000Z",
+      "dataHoraCriacao": "2026-10-21T13:24:00.000Z",
+      "dataHoraProcessamento": "2026-10-21T17:24:00.000Z",
+      "status": "Processado",
+      "motivoCancelamento": null,
+      "versao": 2,
+      "pedidos": [
+        {
+          "id": 2031,
+          "clienteId": 10,
+          "clienteNome": "Padaria Trigo & Cia",
+          "dataHoraCriacao": "2026-10-21T13:24:00.000Z",
+          "status": "Confirmado",
+          "condicaoPagamentoId": 3,
+          "condicaoPagamentoDescricao": "7/14/21 dias",
+          "valorTotalSolicitadoCentavos": 27770,
+          "valorTotalAtendidoCentavos": 27770,
+          "itens": [
+            {
+              "produtoId": 1,
+              "nomeProduto": "Farinha de trigo · 25 kg",
+              "quantidadeSolicitada": 2,
+              "quantidadeAtendida": 2,
+              "precoUnitarioCentavos": 8950
+            },
+            {
+              "produtoId": 2,
+              "nomeProduto": "Chocolate meio amargo · 1 kg",
+              "quantidadeSolicitada": 3,
+              "quantidadeAtendida": 3,
+              "precoUnitarioCentavos": 3290
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 7,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 9256,
+              "valorFinalCentavos": 9256,
+              "dataVencimento": "2026-10-28"
+            },
+            {
+              "numeroParcela": 2,
+              "diasAposConfirmacao": 14,
+              "formaPagamentoId": 2,
+              "formaPagamentoNome": "Boleto bancário",
+              "valorPrevistoCentavos": 9256,
+              "valorFinalCentavos": 9256,
+              "dataVencimento": "2026-11-04"
+            },
+            {
+              "numeroParcela": 3,
+              "diasAposConfirmacao": 21,
+              "formaPagamentoId": 3,
+              "formaPagamentoNome": "Dinheiro em espécie",
+              "valorPrevistoCentavos": 9258,
+              "valorFinalCentavos": 9258,
+              "dataVencimento": "2026-11-11"
+            }
+          ]
+        },
+        {
+          "id": 2032,
+          "clienteId": 11,
+          "clienteNome": "Confeitaria Doce Ponto",
+          "dataHoraCriacao": "2026-10-21T13:24:00.000Z",
+          "status": "Confirmado",
+          "condicaoPagamentoId": 2,
+          "condicaoPagamentoDescricao": "7/14 dias",
+          "valorTotalSolicitadoCentavos": 7560,
+          "valorTotalAtendidoCentavos": 7560,
+          "itens": [
+            {
+              "produtoId": 3,
+              "nomeProduto": "Creme de leite · 1 L",
+              "quantidadeSolicitada": 4,
+              "quantidadeAtendida": 4,
+              "precoUnitarioCentavos": 1890
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 7,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 3780,
+              "valorFinalCentavos": 3780,
+              "dataVencimento": "2026-10-28"
+            },
+            {
+              "numeroParcela": 2,
+              "diasAposConfirmacao": 14,
+              "formaPagamentoId": 2,
+              "formaPagamentoNome": "Boleto bancário",
+              "valorPrevistoCentavos": 3780,
+              "valorFinalCentavos": 3780,
+              "dataVencimento": "2026-11-04"
+            }
+          ]
+        },
+        {
+          "id": 2033,
+          "clienteId": 14,
+          "clienteNome": "Empório dos Pães",
+          "dataHoraCriacao": "2026-10-21T13:24:00.000Z",
+          "status": "Confirmado",
+          "condicaoPagamentoId": 1,
+          "condicaoPagamentoDescricao": "À vista",
+          "valorTotalSolicitadoCentavos": 5340,
+          "valorTotalAtendidoCentavos": 5340,
+          "itens": [
+            {
+              "produtoId": 5,
+              "nomeProduto": "Açúcar de confeiteiro · 1 kg",
+              "quantidadeSolicitada": 6,
+              "quantidadeAtendida": 6,
+              "precoUnitarioCentavos": 890
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 0,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 5340,
+              "valorFinalCentavos": 5340,
+              "dataVencimento": "2026-10-21"
+            }
+          ]
+        }
+      ],
+      "administradorNome": "Administrador de demonstração"
+    },
+    {
+      "id": 1041,
+      "identificadorEnvio": "00000000-0000-4000-8000-000000001041",
+      "vendedorId": 2,
+      "vendedorNome": "Rafael Costa",
+      "dataHoraRecebimento": "2026-10-22T14:24:00.000Z",
+      "dataHoraCriacao": "2026-10-22T13:24:00.000Z",
+      "dataHoraProcessamento": "2026-10-22T18:24:00.000Z",
+      "status": "Cancelado",
+      "motivoCancelamento": "Cliente solicitou o cancelamento antes da confirmação.",
+      "versao": 1,
+      "pedidos": [
+        {
+          "id": 2034,
+          "clienteId": 12,
+          "clienteNome": "Padaria Bom Dia",
+          "dataHoraCriacao": "2026-10-22T13:24:00.000Z",
+          "status": "Cancelado",
+          "condicaoPagamentoId": 1,
+          "condicaoPagamentoDescricao": "À vista",
+          "valorTotalSolicitadoCentavos": 10320,
+          "valorTotalAtendidoCentavos": null,
+          "itens": [
+            {
+              "produtoId": 4,
+              "nomeProduto": "Fermento biológico · 500 g",
+              "quantidadeSolicitada": 8,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 1290
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 0,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 10320,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1042,
+      "identificadorEnvio": "00000000-0000-4000-8000-000000001042",
+      "vendedorId": 1,
+      "vendedorNome": "Ana Martins",
+      "dataHoraRecebimento": "2026-10-23T14:24:00.000Z",
+      "dataHoraCriacao": "2026-10-23T13:24:00.000Z",
+      "dataHoraProcessamento": null,
+      "status": "AguardandoConfirmacao",
+      "motivoCancelamento": null,
+      "versao": 1,
+      "pedidos": [
+        {
+          "id": 2035,
+          "clienteId": 10,
+          "clienteNome": "Padaria Trigo & Cia",
+          "dataHoraCriacao": "2026-10-23T13:24:00.000Z",
+          "status": "Pendente",
+          "condicaoPagamentoId": 3,
+          "condicaoPagamentoDescricao": "7/14/21 dias",
+          "valorTotalSolicitadoCentavos": 105950,
+          "valorTotalAtendidoCentavos": null,
+          "itens": [
+            {
+              "produtoId": 1,
+              "nomeProduto": "Farinha de trigo · 25 kg",
+              "quantidadeSolicitada": 10,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 8950
+            },
+            {
+              "produtoId": 2,
+              "nomeProduto": "Chocolate meio amargo · 1 kg",
+              "quantidadeSolicitada": 5,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 3290
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 7,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 35316,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            },
+            {
+              "numeroParcela": 2,
+              "diasAposConfirmacao": 14,
+              "formaPagamentoId": 2,
+              "formaPagamentoNome": "Boleto bancário",
+              "valorPrevistoCentavos": 35316,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            },
+            {
+              "numeroParcela": 3,
+              "diasAposConfirmacao": 21,
+              "formaPagamentoId": 3,
+              "formaPagamentoNome": "Dinheiro em espécie",
+              "valorPrevistoCentavos": 35318,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            }
+          ]
+        },
+        {
+          "id": 2036,
+          "clienteId": 11,
+          "clienteNome": "Confeitaria Doce Ponto",
+          "dataHoraCriacao": "2026-10-23T13:24:00.000Z",
+          "status": "Pendente",
+          "condicaoPagamentoId": 2,
+          "condicaoPagamentoDescricao": "7/14 dias",
+          "valorTotalSolicitadoCentavos": 63570,
+          "valorTotalAtendidoCentavos": null,
+          "itens": [
+            {
+              "produtoId": 1,
+              "nomeProduto": "Farinha de trigo · 25 kg",
+              "quantidadeSolicitada": 6,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 8950
+            },
+            {
+              "produtoId": 2,
+              "nomeProduto": "Chocolate meio amargo · 1 kg",
+              "quantidadeSolicitada": 3,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 3290
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 7,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 31785,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            },
+            {
+              "numeroParcela": 2,
+              "diasAposConfirmacao": 14,
+              "formaPagamentoId": 2,
+              "formaPagamentoNome": "Boleto bancário",
+              "valorPrevistoCentavos": 31785,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1043,
+      "identificadorEnvio": "00000000-0000-4000-8000-000000001043",
+      "vendedorId": 2,
+      "vendedorNome": "Rafael Costa",
+      "dataHoraRecebimento": "2026-10-24T14:24:00.000Z",
+      "dataHoraCriacao": "2026-10-24T13:24:00.000Z",
+      "dataHoraProcessamento": null,
+      "status": "AguardandoConfirmacao",
+      "motivoCancelamento": null,
+      "versao": 1,
+      "pedidos": [
+        {
+          "id": 2037,
+          "clienteId": 12,
+          "clienteNome": "Padaria Bom Dia",
+          "dataHoraCriacao": "2026-10-24T13:24:00.000Z",
+          "status": "Pendente",
+          "condicaoPagamentoId": 1,
+          "condicaoPagamentoDescricao": "À vista",
+          "valorTotalSolicitadoCentavos": 16500,
+          "valorTotalAtendidoCentavos": null,
+          "itens": [
+            {
+              "produtoId": 3,
+              "nomeProduto": "Creme de leite · 1 L",
+              "quantidadeSolicitada": 6,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 1890
+            },
+            {
+              "produtoId": 4,
+              "nomeProduto": "Fermento biológico · 500 g",
+              "quantidadeSolicitada": 4,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 1290
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 0,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 16500,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            }
+          ]
+        },
+        {
+          "id": 2038,
+          "clienteId": 13,
+          "clienteNome": "Ateliê de Bolos",
+          "dataHoraCriacao": "2026-10-24T13:24:00.000Z",
+          "status": "Pendente",
+          "condicaoPagamentoId": 3,
+          "condicaoPagamentoDescricao": "7/14/21 dias",
+          "valorTotalSolicitadoCentavos": 21570,
+          "valorTotalAtendidoCentavos": null,
+          "itens": [
+            {
+              "produtoId": 3,
+              "nomeProduto": "Creme de leite · 1 L",
+              "quantidadeSolicitada": 8,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 1890
+            },
+            {
+              "produtoId": 6,
+              "nomeProduto": "Granulado de chocolate · 1 kg",
+              "quantidadeSolicitada": 3,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 2150
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 7,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 7190,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            },
+            {
+              "numeroParcela": 2,
+              "diasAposConfirmacao": 14,
+              "formaPagamentoId": 2,
+              "formaPagamentoNome": "Boleto bancário",
+              "valorPrevistoCentavos": 7190,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            },
+            {
+              "numeroParcela": 3,
+              "diasAposConfirmacao": 21,
+              "formaPagamentoId": 3,
+              "formaPagamentoNome": "Dinheiro em espécie",
+              "valorPrevistoCentavos": 7190,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1044,
+      "identificadorEnvio": "00000000-0000-4000-8000-000000001044",
+      "vendedorId": 1,
+      "vendedorNome": "Ana Martins",
+      "dataHoraRecebimento": "2026-10-24T14:24:00.000Z",
+      "dataHoraCriacao": "2026-10-24T13:24:00.000Z",
+      "dataHoraProcessamento": null,
+      "status": "AguardandoConfirmacao",
+      "motivoCancelamento": null,
+      "versao": 1,
+      "pedidos": [
+        {
+          "id": 2039,
+          "clienteId": 14,
+          "clienteNome": "Empório dos Pães",
+          "dataHoraCriacao": "2026-10-24T13:24:00.000Z",
+          "status": "Pendente",
+          "condicaoPagamentoId": 2,
+          "condicaoPagamentoDescricao": "7/14 dias",
+          "valorTotalSolicitadoCentavos": 16640,
+          "valorTotalAtendidoCentavos": null,
+          "itens": [
+            {
+              "produtoId": 5,
+              "nomeProduto": "Açúcar de confeiteiro · 1 kg",
+              "quantidadeSolicitada": 10,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 890
+            },
+            {
+              "produtoId": 4,
+              "nomeProduto": "Fermento biológico · 500 g",
+              "quantidadeSolicitada": 6,
+              "quantidadeAtendida": null,
+              "precoUnitarioCentavos": 1290
+            }
+          ],
+          "parcelas": [
+            {
+              "numeroParcela": 1,
+              "diasAposConfirmacao": 7,
+              "formaPagamentoId": 1,
+              "formaPagamentoNome": "Pix",
+              "valorPrevistoCentavos": 8320,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            },
+            {
+              "numeroParcela": 2,
+              "diasAposConfirmacao": 14,
+              "formaPagamentoId": 2,
+              "formaPagamentoNome": "Boleto bancário",
+              "valorPrevistoCentavos": 8320,
+              "valorFinalCentavos": null,
+              "dataVencimento": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "vendas": [
+    {
+      "id": 1,
+      "pedidoId": 2031,
+      "dataHoraConfirmacao": "2026-10-21T17:24:00.000Z",
+      "valorTotalCentavos": 27770,
+      "itens": [
+        {
+          "produtoId": 1,
+          "nomeProduto": "Farinha de trigo · 25 kg",
+          "quantidadeSolicitada": 2,
+          "quantidadeAtendida": 2,
+          "precoUnitarioCentavos": 8950
+        },
+        {
+          "produtoId": 2,
+          "nomeProduto": "Chocolate meio amargo · 1 kg",
+          "quantidadeSolicitada": 3,
+          "quantidadeAtendida": 3,
+          "precoUnitarioCentavos": 3290
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "pedidoId": 2032,
+      "dataHoraConfirmacao": "2026-10-21T17:24:00.000Z",
+      "valorTotalCentavos": 7560,
+      "itens": [
+        {
+          "produtoId": 3,
+          "nomeProduto": "Creme de leite · 1 L",
+          "quantidadeSolicitada": 4,
+          "quantidadeAtendida": 4,
+          "precoUnitarioCentavos": 1890
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "pedidoId": 2033,
+      "dataHoraConfirmacao": "2026-10-21T17:24:00.000Z",
+      "valorTotalCentavos": 5340,
+      "itens": [
+        {
+          "produtoId": 5,
+          "nomeProduto": "Açúcar de confeiteiro · 1 kg",
+          "quantidadeSolicitada": 6,
+          "quantidadeAtendida": 6,
+          "precoUnitarioCentavos": 890
+        }
+      ]
+    }
+  ],
+  "contasReceber": [
+    {
+      "id": 1,
+      "vendaId": 1,
+      "pedidoId": 2031,
+      "numeroParcela": 1,
+      "formaPagamentoId": 1,
+      "dataVencimento": "2026-10-28",
+      "valorCentavos": 9256,
+      "status": "Pendente"
+    },
+    {
+      "id": 2,
+      "vendaId": 1,
+      "pedidoId": 2031,
+      "numeroParcela": 2,
+      "formaPagamentoId": 2,
+      "dataVencimento": "2026-11-04",
+      "valorCentavos": 9256,
+      "status": "Pendente"
+    },
+    {
+      "id": 3,
+      "vendaId": 1,
+      "pedidoId": 2031,
+      "numeroParcela": 3,
+      "formaPagamentoId": 3,
+      "dataVencimento": "2026-11-11",
+      "valorCentavos": 9258,
+      "status": "Pendente"
+    },
+    {
+      "id": 4,
+      "vendaId": 2,
+      "pedidoId": 2032,
+      "numeroParcela": 1,
+      "formaPagamentoId": 1,
+      "dataVencimento": "2026-10-28",
+      "valorCentavos": 3780,
+      "status": "Pendente"
+    },
+    {
+      "id": 5,
+      "vendaId": 2,
+      "pedidoId": 2032,
+      "numeroParcela": 2,
+      "formaPagamentoId": 2,
+      "dataVencimento": "2026-11-04",
+      "valorCentavos": 3780,
+      "status": "Pendente"
+    },
+    {
+      "id": 6,
+      "vendaId": 3,
+      "pedidoId": 2033,
+      "numeroParcela": 1,
+      "formaPagamentoId": 1,
+      "dataVencimento": "2026-10-21",
+      "valorCentavos": 5340,
+      "status": "Pendente"
+    }
+  ]
+}

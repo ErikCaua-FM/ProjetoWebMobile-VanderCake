@@ -1,0 +1,32 @@
+{
+    "identificadorEnvio": "92eb1f5b-1394-4477-91d0-864c7add59bd",
+    "dataHoraCriacao": "2026-10-22T16:00:00Z",
+    "pedidos": [
+        {
+            "clienteId": 10,
+            "dataHoraCriacao": "2026-10-22T16:00:00Z",
+            "condicaoPagamentoId": 3,
+            "itens": [
+                {
+                    "produtoId": 100,
+                    "quantidadeSolicitada": 10,
+                    "precoUnitario": 10
+                }
+            ],
+            "parcelas": [
+                {
+                    "numeroParcela": 1,
+                    "formaPagamentoId": 1
+                },
+                {
+                    "numeroParcela": 2,
+                    "formaPagamentoId": 2
+                },
+                {
+                    "numeroParcela": 3,
+                    "formaPagamentoId": 3
+                }
+            ]
+        }
+    ]
+}

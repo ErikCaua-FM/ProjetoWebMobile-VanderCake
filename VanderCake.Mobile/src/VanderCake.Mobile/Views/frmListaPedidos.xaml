@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<views:PaginaBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:VanderCake.Views" xmlns:models="clr-namespace:VanderCake.Models" x:Class="VanderCake.Views.frmListaPedidos" x:Name="Pagina" Title="Lista de Pedidos" x:DataType="views:frmListaPedidos">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Atualizar" Clicked="OnAtualizar"/>
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,*,Auto" Padding="18,8,18,16" RowSpacing="10">
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{StaticResource Primary}"/>
+            <Label Text="{Binding Erro}" IsVisible="{Binding TemErro}" TextColor="#A61925" BackgroundColor="#FFF0F1" Padding="10"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" IsEnabled="{Binding Livre}">
+            <ScrollView>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Pedidos para a loja" Style="{StaticResource Heading}"/>
+                    <Label x:Name="SituacaoLabel" Style="{StaticResource MutedLabel}"/>
+                    <Label x:Name="VazioLabel" Text="A lista está vazia. Acrescente um pedido pelo carrinho de um cliente."/>
+                    <VerticalStackLayout x:Name="PedidosLayout">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:Pedido">
+                                <Border Style="{StaticResource Card}">
+                                    <VerticalStackLayout Spacing="8">
+                                        <Label Text="{Binding ClienteNome}" FontFamily="OpenSansSemibold" FontSize="19"/>
+                                        <Label Text="{Binding DataTexto}" Style="{StaticResource MutedLabel}"/>
+                                        <Label Text="{Binding ResumoItens}"/>
+                                        <Label Text="{Binding CondicaoPagamentoDescricao}" Style="{StaticResource MutedLabel}"/>
+                                        <Label Text="{Binding TotalTexto}" FontFamily="OpenSansSemibold" FontSize="20"/>
+                                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
+                                            <Button Text="Detalhes" Style="{StaticResource Secondary}" CommandParameter="{Binding .}" Clicked="OnDetalhes"/>
+                                            <Button Grid.Column="1" Text="Editar" Style="{StaticResource Secondary}" CommandParameter="{Binding .}" Clicked="OnEditar" IsEnabled="{Binding PodeEditar, Source={x:Reference Pagina}, x:DataType=views:frmListaPedidos}"/>
+                                            <Button Grid.Column="2" Text="Remover" Style="{StaticResource Secondary}" CommandParameter="{Binding .}" Clicked="OnRemover" IsEnabled="{Binding PodeEditar, Source={x:Reference Pagina}, x:DataType=views:frmListaPedidos}"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                    <Label x:Name="CarrinhosLabel" Text="Carrinhos em edição — conclua ou descarte antes de enviar" FontFamily="OpenSansSemibold"/>
+                    <VerticalStackLayout x:Name="CarrinhosLayout">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:Pedido">
+                                <Border Style="{StaticResource Card}">
+                                    <VerticalStackLayout Spacing="8">
+                                        <Label Text="{Binding ClienteNome}" FontFamily="OpenSansSemibold"/>
+                                        <Label Text="Este carrinho ainda não foi concluído." Style="{StaticResource MutedLabel}"/>
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                            <Button Text="Continuar" CommandParameter="{Binding .}" Clicked="OnEditar"/>
+                                            <Button Grid.Column="1" Text="Descartar" Style="{StaticResource Secondary}" CommandParameter="{Binding .}" Clicked="OnDescartarCarrinho"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" IsEnabled="{Binding Livre}" Spacing="8">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Total previsto do lote" VerticalOptions="Center"/>
+                <Label x:Name="TotalLabel" Grid.Column="1" FontFamily="OpenSansSemibold" FontSize="23"/>
+            </Grid>
+            <Button x:Name="EnviarButton" Text="Enviar para a Loja" Clicked="OnEnviar"/>
+        </VerticalStackLayout>
+    </Grid>
+</views:PaginaBase>

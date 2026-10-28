@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Solution>
+    <Folder Name="/src/">
+        <Project Path="src/VanderCake.Mobile/VanderCake.Mobile.csproj"/>
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests/VanderCake.Tests/VanderCake.Tests.csproj"/>
+    </Folder>
+</Solution>

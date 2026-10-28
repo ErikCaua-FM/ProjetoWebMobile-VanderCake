@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#EA1D2C">
+    <meta name="description" content="VanderCake: gestão de vendas, produtos e carteiras de clientes.">
+    <title>Contas a receber | VanderCake</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/recebimentos.js"></script>
+</head>
+<body >
+    <a class="pular" href="#principal">Pular para o conteúdo</a>
+    <header id="cabecalho" class="cabecalho"></header>
+    <main id="principal" class="container">
+        <a class="voltar" href="index.html">← Voltar ao painel</a>
+        <div class="apresentacao"><div><p class="sobretitulo">FINANCEIRO</p><h1>Contas a receber</h1><p class="muted">Consulte as parcelas e registre o recebimento integral de cada uma.</p></div><span class="ambiente" data-modo></span></div>
+        <p id="mensagem" class="mensagem" role="status" hidden></p>
+        <section class="card">
+            <div class="card-cabecalho"><div><h2>Parcelas <span id="total" class="contador">0</span></h2><p id="total-valor" class="muted"></p></div><button id="atualizar" class="botao secundario pequeno">↻ Atualizar</button></div>
+            <div class="filtros financeiro">
+                <label class="campo">Cliente ou vendedor<input id="pesquisa" type="search" placeholder="Nome, documento ou pedido"></label>
+                <label class="campo">Vencimento de<input id="de" type="date"></label>
+                <label class="campo">Vencimento até<input id="ate" type="date"></label>
+                <label class="campo">Situação<select id="situacao"><option value="">Todas</option value="Pendente" selected>A receber</option><option value="Paga">Recebidas</option></select></label>
+            </div>
+            <div class="tabela-container"><table><caption class="sr-only">Parcelas das vendas</caption><thead><tr><th>Cliente / vendedor</th><th>Pedido / parcela</th><th>Vencimento</th><th>Forma</th><th>Valor</th><th>Situação</th><th></th></tr></thead><tbody id="parcelas"></tbody></table></div>
+            <div id="vazio" class="vazio" hidden><h3>Nenhuma parcela encontrada</h3><p>Confira os filtros ou confirme um pedido na loja.</p></div>
+        </section>
+    </main>
+    <footer class="rodape"><span>VanderCake · Gestão comercial</span></footer>
+</body>
+</html>

@@ -1,0 +1,415 @@
+ESPECIFICAÇÕES  — VANDERCAKE
+IA UTILIZADA: CHAT GPT PLUS
+
+COMPONENTE — TECNOLOGIA
+
+App Mobile — C#, .NET MAUI e SQLite.
+API — C# e ASP.NET Core.
+App Web — ASP.NET Core MVC.
+Banco central — MySQL.
+IDE — Visual Studio Code.
+Controle de versão — Git com repositório público no GitHub.
+
+O Mobile e a Web utilizarão a API para consultar e alterar os dados centralizados. O acesso ao MySQL e a aplicação das regras de negócio serão responsabilidade da API.
+
+O MySQL armazenará os registros oficiais recebidos pela API. O SQLite armazenará os dados sincronizados e os rascunhos ainda não enviados. Um pedido salvo somente no SQLite ainda não estará disponível para a loja.
+
+
+PERFIS DE ACESSO
+
+Vendedor:
+- Acessa o Mobile com sua conta cadastrada pela loja.
+- Consulta sua carteira de clientes, cadastra clientes e registra seus pedidos.
+- Consulta produtos, monta a Lista de Pedidos e acompanha os resultados enviados pela loja.
+
+Administrador da loja:
+- Acessa a Web com conta de administrador.
+- Gerencia vendedores, clientes, localidades, categorias, produtos, estoque e cadastros de pagamento.
+- Consulta pedidos gerais e individuais, confirma vendas e acompanha contas a receber.
+
+Clientes não terão login próprio nesta versão. O cadastro de vendedores será realizado exclusivamente pela Web. Não haverá cadastro público de administradores.
+
+
+FLUXO ESPERADO
+
+1. O vendedor abre o Mobile e realiza o login.
+2. O aplicativo consulta a API e atualiza no SQLite a carteira de clientes, catálogo, categorias, condições e formas de pagamento e histórico de pedidos do vendedor.
+3. A tela inicial apresenta a carteira de clientes, o botão de novo cliente e, no canto superior direito, a opção "Lista de Pedidos", com a quantidade de pedidos ainda não enviados.
+4. Ao selecionar um cliente, o vendedor visualiza seus pedidos e o botão "Novo pedido".
+5. O vendedor abre o catálogo, filtra por categoria e adiciona produtos e quantidades ao carrinho daquele cliente.
+6. No carrinho, escolhe a condição de pagamento. O sistema apresenta cada parcela com seu prazo, valor previsto e um campo próprio para selecionar a forma de pagamento, de maneira independente das demais parcelas.
+7. O botão "Acrescentar Pedido à Lista" salva o pedido no SQLite, vinculado ao cliente e ao PedidoGeral em montagem. Essa ação não envia o pedido à loja e não movimenta estoque.
+8. Na Lista de Pedidos, o vendedor visualiza os clientes, itens, quantidades, valores previstos e pagamentos de cada pedido. Pode editar ou remover os pedidos antes do envio.
+9. O botão "Enviar pedidos para a Loja" transmite o PedidoGeral e todos os seus pedidos à API.
+10. A API valida o conjunto e grava o PedidoGeral, pedidos, itens e parcelas previstas no MySQL, em uma única transação. O recebimento não reserva nem baixa estoque e não gera vendas ou contas a receber.
+11. Após a confirmação de recebimento pela API, o Mobile marca o lote como enviado, mantém seu histórico e libera uma nova lista vazia. Uma falha de comunicação não deve apagar os rascunhos.
+12. A Web exibe o PedidoGeral recebido, identificado pelo vendedor, data e situação, com acesso aos pedidos de cada cliente.
+13. A loja consulta uma prévia do atendimento e dos cortes. Ao confirmar o lote, a API recalcula a distribuição com o estoque atual, registra as quantidades atendidas e gera as vendas, itens de venda e contas a receber.
+14. A baixa de estoque ocorre apenas nessa confirmação, pelas quantidades efetivamente atendidas. Toda a confirmação do lote acontece em uma única transação.
+15. O Mobile sincroniza o resultado e mostra, por cliente, as quantidades solicitadas, atendidas e cortadas, o valor final e as parcelas resultantes.
+
+A prévia da Web não garante reserva de estoque. Se os cortes mudarem entre a prévia e a confirmação, o sistema deverá apresentar a nova prévia para confirmação da loja.
+
+
+RELAÇÕES PRINCIPAIS
+
+Vendedor possui vários Clientes.
+Vendedor envia vários PedidosGerais ao longo do tempo.
+PedidoGeral contém um ou mais Pedidos individuais e pertence a um único Vendedor.
+Cliente possui vários Pedidos ao longo do tempo.
+Pedido contém um ou mais registros em ItemPedido e utiliza uma CondicaoPagamento.
+Produto pertence a uma Categoria.
+CondicaoPagamento possui uma ou mais regras de parcela em ParcelasCondicaoPagamento.
+Pedido possui suas parcelas previstas em ParcelasPedido.
+Cada parcela de pedido utiliza uma FormaPagamento.
+Pedido pode originar, no máximo, uma Venda; pedidos sem atendimento não geram venda.
+Venda contém um ou mais registros em ItemVenda.
+Venda gera ContasReceber para suas parcelas de valor final positivo.
+Estado possui várias Cidades; os cadastros com endereço referenciam uma Cidade.
+
+Proposta de simplificação: haverá apenas um pedido por cliente dentro do mesmo PedidoGeral. Se o cliente já estiver na lista, o aplicativo abrirá o pedido existente para edição. O cliente poderá aparecer normalmente em outros pedidos gerais.
+
+
+REQUISITOS FUNCIONAIS
+
+RF01 — Permitir login de vendedores no Mobile e de administradores na Web, com acesso conforme o perfil.
+RF02 — Permitir à Web cadastrar, consultar, editar e desativar vendedores, clientes, categorias, produtos, condições e formas de pagamento, além de manter estados e cidades.
+RF03 — Permitir cadastrar clientes pelo Mobile, automaticamente vinculados ao vendedor autenticado. O cadastro deverá ser confirmado pela API antes de o novo cliente ser utilizado em um pedido.
+RF04 — Exibir a carteira de clientes do vendedor, com pesquisa por nome ou documento, botão de novo cliente e acesso à Lista de Pedidos no canto superior direito.
+RF05 — Exibir o histórico de pedidos do cliente selecionado, seus detalhes e situações, além da opção "Novo pedido".
+RF06 — Exibir produtos ativos com nome, categoria, descrição, preço e estoque informativo, permitindo filtrar por categoria.
+RF07 — Permitir incluir, alterar e remover produtos do carrinho, calculando subtotais e total previsto.
+RF08 — Disponibilizar as condições à vista, 7/14 dias e 7/14/21 dias, mostrando a quantidade de parcelas correspondente.
+RF09 — Exigir a seleção individual da forma de pagamento de cada parcela: boleto bancário, Pix, cartão de crédito, cartão de débito ou dinheiro em espécie. O vendedor poderá combinar formas diferentes no mesmo pedido ou repetir a mesma forma em mais de uma parcela, conforme a escolha do cliente.
+RF10 — Salvar o pedido localmente pelo botão "Acrescentar Pedido à Lista", sem transmissão à loja.
+RF11 — Exibir na Lista de Pedidos o cliente, os itens, as quantidades, o total e as parcelas de cada pedido, além do total previsto do PedidoGeral. Permitir edição e remoção antes do envio.
+RF12 — Enviar todos os pedidos da lista pelo botão "Enviar pedidos para a Loja", apresentando o resultado ou os erros de validação do envio.
+RF13 — Permitir à Web consultar pedidos gerais por vendedor, período e situação, e abrir os pedidos individuais por cliente.
+RF14 — Apresentar na Web uma prévia do corte automático por produto e cliente, com quantidades solicitadas, atendidas, cortadas e valores finais.
+RF15 — Permitir à loja confirmar o PedidoGeral completo. A API deverá aplicar o corte, gerar as vendas e baixar o estoque em conjunto.
+RF16 — Permitir à loja cancelar um PedidoGeral ainda não processado, informando o motivo, sem gerar venda ou movimentação de estoque.
+RF17 — Exibir vendas por cliente e vendedor, preservando o vínculo com o pedido individual e com o PedidoGeral de origem.
+RF18 — Gerar contas a receber após a confirmação da venda e permitir consultar parcelas por cliente, vencimento e situação, com registro manual do recebimento integral de cada parcela.
+RF19 — Sincronizar no Mobile os pedidos recebidos pela loja e seus resultados, sem sobrescrever os pedidos locais ainda não enviados.
+RF20 — Permitir à loja atualizar o estoque dos produtos e impedir que o saldo disponível fique negativo.
+RF21 — Preservar os dados históricos de pedidos, cortes, vendas e pagamentos, mesmo após alterações nos cadastros.
+RF22 — Informar situações de lista vazia, ausência de pedidos, falta de conexão, envio em andamento, envio concluído e erro de validação.
+
+
+REQUISITOS NÃO FUNCIONAIS
+
+RNF01 — O SQLite deverá permitir consultar dados já sincronizados e continuar a montagem local dos pedidos de clientes já cadastrados, sem baixar todo o catálogo a cada abertura.
+RNF02 — Login, cadastro de novo cliente, envio de pedidos e confirmação pela loja exigirão comunicação com a API. Consulta local e montagem de rascunhos não dependerão de conexão contínua.
+RNF03 — A API deverá autenticar as operações e impedir que um vendedor consulte ou altere dados de outro vendedor. As funções administrativas serão restritas à loja.
+RNF04 — As senhas deverão ser armazenadas como hash, sem senha em texto puro no MySQL ou no SQLite. Credenciais de acesso à API e ao banco não deverão ser incluídas no repositório público. A comunicação em uso real deverá utilizar HTTPS.
+RNF05 — O MySQL deverá garantir integridade referencial, unicidade dos identificadores de envio e transações para recebimento dos lotes e confirmação das vendas.
+RNF06 — Erros de conexão deverão ser tratados sem encerrar o aplicativo nem perder os pedidos locais. Repetições de envio ou confirmação não poderão duplicar registros ou baixas de estoque.
+RNF07 — Valores monetários deverão utilizar precisão decimal de duas casas. Datas e horários deverão seguir um padrão consistente entre API, Web, Mobile e banco.
+RNF08 — As telas deverão apresentar mensagens claras e diferenciar valores previstos de valores confirmados. A navegação deverá manter visível o cliente ao qual o carrinho pertence.
+
+
+REGRAS DE NEGÓCIO
+
+RN01 — Somente vendedores ativos e autenticados poderão registrar e enviar pedidos. Cada cliente terá um vendedor responsável. A API deverá validar esse vínculo, sem confiar apenas nos identificadores enviados pelo aplicativo.
+RN02 — O vendedor poderá manter uma Lista de Pedidos em montagem por vez nesta versão. Cada lista dará origem a um PedidoGeral; nenhum pedido individual pertencerá a mais de um lote.
+RN03 — Conforme a proposta de simplificação, um cliente terá no máximo um pedido dentro do mesmo lote. Cada produto aparecerá apenas uma vez em cada pedido; novas inclusões do mesmo produto somarão as quantidades.
+RN04 — Quantidades solicitadas deverão ser inteiros positivos. O estoque será um inteiro maior ou igual a zero. A quantidade atendida poderá ser zero e nunca ultrapassará a solicitada.
+RN05 — O estoque exibido no Mobile será informativo e poderá estar desatualizado. Será permitido solicitar quantidade superior ao saldo, inclusive de produto ativo sem estoque, pois a definição do atendimento ocorrerá na loja.
+RN06 — O carrinho e a Lista de Pedidos serão persistidos no SQLite por vendedor. Fechar o aplicativo não apagará os rascunhos. Ao sair da conta, os rascunhos não enviados continuarão vinculados àquela conta e somente reaparecerão após o login do mesmo vendedor; outra conta não poderá acessá-los.
+RN07 — Não será permitido acrescentar pedido sem itens, sem cliente ou com pagamento incompleto. Também não será permitido enviar um PedidoGeral vazio.
+RN08 — Cadastro de cliente e recebimento do lote terão operações distintas. Um cliente cadastrado com sucesso continuará cadastrado mesmo que o envio posterior do lote falhe.
+RN09 — A API validará todos os pedidos antes de aceitar o lote. Se qualquer pedido for inválido, nenhum pedido desse envio será gravado, e os erros serão devolvidos com identificação do cliente e do item.
+RN10 — A API será a autoridade para preços, subtotais e totais. Se o preço sincronizado diferir do preço atual no momento do envio, o lote permanecerá local para atualização e revisão do vendedor, sem alteração silenciosa dos valores.
+RN11 — Depois de aceito o envio, os nomes e preços registrados nos itens serão preservados até a confirmação. Alterações posteriores no catálogo não modificarão esses pedidos. A inativação de produtos impedirá novas inclusões, sem apagar pedidos já recebidos.
+RN12 — Cada PedidoGeral terá um identificador de envio gerado no Mobile e mantido nas tentativas de retransmissão. A API reconhecerá o lote já recebido; a mesma identificação não poderá ser reutilizada para um conteúdo diferente.
+RN13 — Se a resposta do envio for perdida, o Mobile consultará o resultado pelo identificador antes de permitir alterações naquele lote. O envio somente será considerado concluído após confirmação da API.
+RN14 — Depois do recebimento pela loja, o lote não poderá ser editado pelo vendedor. A loja poderá confirmar ou cancelar o lote pendente; novos pedidos serão feitos em outro lote.
+RN15 — Enviar ou receber um pedido não reservará e não baixará estoque. A baixa ocorrerá uma única vez, na confirmação pela loja, pelas quantidades atendidas.
+RN16 — O corte será calculado separadamente para cada produto, considerando conjuntamente todos os clientes do PedidoGeral. A proposta de rateio e seus desempates estão definidos na seção "Critério de corte".
+RN17 — A confirmação deverá considerar o estoque atualizado e impedir que duas confirmações concorrentes consumam as mesmas unidades. Se qualquer parte falhar, nenhuma venda, parcela, baixa ou mudança de situação daquele processamento será concluída.
+RN18 — Cada pedido com pelo menos um item atendido gerará exatamente uma venda. Um pedido totalmente cortado ficará como NaoAtendido, sem venda e sem contas a receber. Itens com atendimento zero não serão incluídos em ItemVenda.
+RN19 — As quantidades solicitadas serão preservadas em ItemPedido. A quantidade cortada será calculada como QuantidadeSolicitada menos QuantidadeAtendida; cortes não serão apagamentos de itens.
+RN20 — Cada pedido utilizará uma única condição de pagamento, que definirá os prazos das parcelas. A forma de pagamento será escolhida separadamente para cada parcela, conforme a preferência do cliente. Por exemplo, na condição 7/14/21 dias, a parcela de 7 dias poderá ser paga por Pix, a de 14 dias por boleto bancário e a de 21 dias por dinheiro em espécie. Não será exigida uma forma de pagamento única para todo o pedido.
+RN21 — As condições iniciais serão: à vista, uma parcela no dia da confirmação; 7/14 dias, duas parcelas; 7/14/21 dias, três parcelas. Como proposta, os prazos serão contados em dias corridos a partir da data da confirmação da venda.
+RN22 — O total será dividido igualmente entre as parcelas em centavos, deixando a diferença de arredondamento na última. Exemplo: R$ 100,00 em três parcelas resultará em R$ 33,33, R$ 33,33 e R$ 33,34.
+RN23 — O corte recalculará o total final e os valores das parcelas, mantendo a condição e as formas de pagamento escolhidas. O valor previsto ficará em ParcelasPedido e o valor efetivamente devido ficará em ContasReceber. Uma parcela de valor final zero não gerará conta a receber.
+RN24 — À vista significa vencimento na data da confirmação, sem marcação automática de pagamento. Uma conta somente ficará como Paga quando a loja registrar seu recebimento. Atraso será calculado pela data de vencimento e pelo estado de pagamento.
+RN25 — Cancelar um lote pendente cancelará todos os seus pedidos, preservando-os no histórico e informando o motivo. Não haverá corte, venda ou baixa de estoque nesse cancelamento.
+RN26 — Cadastros utilizados no histórico não poderão ser excluídos fisicamente. Será utilizada a desativação quando prevista. Condições já utilizadas não terão seus prazos alterados; formas de pagamento utilizadas não poderão ser redefinidas como outro método. Novos prazos ou métodos exigirão novos cadastros, preservando o significado dos registros antigos.
+RN27 — Situações e transições obedecerão à seção seguinte. Repetir uma confirmação já concluída retornará seu resultado, sem gerar outra venda ou consumir estoque novamente.
+RN28 — O cadastro de condições de pagamento permitirá descrever seus prazos, mas esta versão utilizará apenas as três condições especificadas. Não haverá juros, descontos financeiros, antecipações ou renegociação.
+
+
+SITUAÇÕES E TRANSIÇÕES
+
+PedidoGeral:
+- Rascunho: somente no SQLite, enquanto a Lista de Pedidos estiver em montagem.
+- AguardandoConfirmacao: recebido e validado pela API.
+- Processado: lote confirmado pela loja; cada pedido já possui seu resultado final.
+- Cancelado: lote recusado/cancelado pela loja antes do processamento.
+
+Transições: Rascunho para AguardandoConfirmacao após recebimento pela API; AguardandoConfirmacao para Processado ou Cancelado. Não haverá retorno para rascunho.
+
+Pedido individual:
+- Rascunho: somente local, ainda não enviado.
+- Pendente: recebido pela API, aguardando a loja.
+- Confirmado: todas as quantidades foram atendidas.
+- ConfirmadoComCorte: houve redução em algum item, mas pelo menos uma unidade foi atendida.
+- NaoAtendido: nenhuma unidade pôde ser atendida.
+- Cancelado: o PedidoGeral pendente foi cancelado.
+
+Transições: Rascunho para Pendente; Pendente para um dos quatro resultados finais. As quantidades atendidas permanecerão nulas enquanto não houver processamento; zero representará atendimento realmente igual a zero após o corte.
+
+Um PedidoGeral ficará como Processado mesmo se todos os seus pedidos forem NaoAtendido. Isso registra que o lote foi analisado, sem representar uma venda inexistente.
+
+Venda:
+- O registro existirá somente quando confirmado, sem duplicar os estados do pedido.
+
+ContasReceber:
+- Pendente ou Paga.
+- Uma parcela pendente com vencimento anterior à data atual será exibida como vencida, sem necessidade de um terceiro estado armazenado.
+
+
+CRITÉRIO DE CORTE — PROPOSTA PARA VALIDAÇÃO
+
+A expressão "corte justo" será interpretada nesta proposta como atendimento proporcional à quantidade solicitada por cada cliente, dentro do mesmo PedidoGeral. Não será uma divisão de quantidades iguais entre clientes com demandas diferentes.
+
+Para cada produto:
+1. Somar as quantidades solicitadas nos pedidos do lote.
+2. Se o estoque disponível for suficiente, atender integralmente os pedidos.
+3. Se o estoque for insuficiente, calcular a quota de cada cliente: estoque disponível multiplicado pela quantidade solicitada por ele, dividido pelo total solicitado.
+4. Atribuir inicialmente a parte inteira de cada quota, sem ultrapassar a solicitação.
+5. Distribuir as unidades restantes, uma por cliente, em ordem decrescente da parte decimal descartada. Em empate, utilizar o menor ID_Cliente.
+6. Se o estoque for zero, atribuir quantidade atendida zero a todos os pedidos daquele produto.
+7. Recalcular os totais e, na confirmação, baixar exatamente a soma das quantidades atendidas.
+
+Exemplo:
+Cliente A solicita 10 unidades; B solicita 6; C solicita 4.
+Demanda total: 20 unidades. Estoque disponível: 11 unidades.
+Quotas: A = 5,5; B = 3,3; C = 2,2.
+Distribuição inicial: 5, 3 e 2, somando 10 unidades.
+A unidade restante fica com A, que tem o maior resto decimal.
+Atendimento final: A = 6, B = 3 e C = 2.
+Cortes: A = 4, B = 3 e C = 2.
+
+O resultado nunca poderá ultrapassar o estoque ou a quantidade solicitada. Quando houver menos unidades que clientes, alguns poderão receber zero.
+
+O rateio será limitado ao lote que estiver sendo confirmado. Outros lotes pendentes não participarão desse cálculo. Como proposta inicial, o estoque será consumido na ordem das confirmações feitas pela loja, sem promessa de prioridade pela data de envio.
+
+Não haverá ajuste manual de quantidades que substitua o rateio nesta versão. A loja poderá cancelar o lote pendente ou confirmar o resultado automático.
+
+
+MODELOS DO BANCO CENTRAL — MYSQL
+
+Convenções:
+- ID será INT, chave primária com geração automática.
+- FK significa chave estrangeira; UNIQUE significa valor ou combinação sem duplicidade.
+- Campos serão obrigatórios, exceto os marcados como NULL.
+- Ativo será BOOLEAN, com valor inicial verdadeiro.
+- Valores monetários serão DECIMAL(12,2). Preços unitários serão positivos; totais e valores previstos poderão ser zero após os tratamentos definidos.
+- Datas de eventos serão DATETIME; vencimentos e pagamentos serão DATE.
+- Todas as FKs preservarão os registros históricos, sem exclusão em cascata de pedidos, vendas ou contas.
+- Os cadastros principais continuarão em tabelas separadas, seguindo a estrutura inicial do documento.
+
+1. Vendedores
+ID             — INT — PK.
+Nome           — VARCHAR(100) — Nome completo.
+Documento      — VARCHAR(20) UNIQUE — CPF ou documento do vendedor.
+Rua            — VARCHAR(100) — Logradouro.
+Bairro         — VARCHAR(60) — Bairro.
+CEP            — VARCHAR(9) — Código postal.
+Numero         — VARCHAR(10) — Número do endereço.
+ID_Cidade      — INT — FK de Cidades.
+Telefone       — VARCHAR(20) — Contato.
+Email          — VARCHAR(150) UNIQUE — Identificação de login.
+SenhaHash      — VARCHAR(255) — Hash da senha.
+Ativo          — BOOLEAN — Permissão para atuar no sistema.
+
+2. Administradores
+ID             — INT — PK.
+Nome           — VARCHAR(100) — Nome completo.
+Documento      — VARCHAR(20) UNIQUE — CPF ou documento.
+Rua            — VARCHAR(100) — Logradouro.
+Bairro         — VARCHAR(60) — Bairro.
+CEP            — VARCHAR(9) — Código postal.
+Numero         — VARCHAR(10) — Número do endereço.
+ID_Cidade      — INT — FK de Cidades.
+Telefone       — VARCHAR(20) — Contato.
+Email          — VARCHAR(150) UNIQUE — Identificação de login na Web.
+SenhaHash      — VARCHAR(255) — Hash da senha.
+Ativo          — BOOLEAN — Permissão de acesso.
+
+3. Clientes
+ID             — INT — PK.
+Nome           — VARCHAR(100) — Nome completo ou razão social.
+Documento      — VARCHAR(20) UNIQUE — CPF ou CNPJ.
+Rua            — VARCHAR(100) — Logradouro.
+Bairro         — VARCHAR(60) — Bairro.
+CEP            — VARCHAR(9) — Código postal.
+Numero         — VARCHAR(10) — Número do endereço.
+Telefone       — VARCHAR(20) — Contato.
+Email          — VARCHAR(150) NULL — Contato; não será login nem necessariamente exclusivo.
+ID_Vendedor    — INT — FK de Vendedores; responsável pela carteira.
+ID_Cidade      — INT — FK de Cidades.
+Ativo          — BOOLEAN — Disponibilidade para novos pedidos.
+
+Documentos deverão ser normalizados antes da verificação de duplicidade. O mesmo CPF/CNPJ não poderá ser cadastrado novamente com outra pontuação ou em outra carteira.
+
+4. Estados
+ID             — INT — PK.
+Estado         — VARCHAR(100) — Nome do estado.
+UF             — CHAR(2) UNIQUE — Sigla da unidade federativa.
+
+5. Cidades
+ID             — INT — PK.
+Cidade         — VARCHAR(100) — Nome da cidade.
+ID_Estado      — INT — FK de Estados.
+Restrição: UNIQUE (ID_Estado, Cidade).
+
+6. Categorias
+ID             — INT — PK.
+Nome           — VARCHAR(60) UNIQUE — Nome da categoria/grupo.
+Ativo          — BOOLEAN — Disponível para classificação de novos produtos.
+
+7. Produtos
+ID             — INT — PK.
+Nome           — VARCHAR(100) — Nome do produto.
+ID_Categoria   — INT — FK de Categorias; substitui a categoria armazenada como texto.
+Descricao      — TEXT NULL — Informações do produto.
+Preco          — DECIMAL(12,2) — Preço atual de venda.
+Estoque        — INT — Saldo disponível, maior ou igual a zero.
+Ativo          — BOOLEAN — Disponível para inclusão em novos pedidos.
+
+8. CondicoesPagamento
+ID             — INT — PK.
+Descricao      — VARCHAR(60) UNIQUE — À vista, 7/14 dias ou 7/14/21 dias.
+Ativo          — BOOLEAN — Disponível para novos pedidos.
+
+A quantidade de parcelas será obtida pelos registros de ParcelasCondicaoPagamento, evitando guardar esse número em dois locais.
+
+9. ParcelasCondicaoPagamento
+ID                    — INT — PK.
+ID_CondicaoPagamento  — INT — FK de CondicoesPagamento.
+NumeroParcela         — INT — Ordem a partir de 1.
+DiasAposConfirmacao   — INT — Dias corridos até o vencimento; aceita zero.
+Restrição: UNIQUE (ID_CondicaoPagamento, NumeroParcela).
+
+Regras iniciais:
+- À vista: parcela 1 com 0 dias.
+- 7/14 dias: parcela 1 com 7 dias; parcela 2 com 14 dias.
+- 7/14/21 dias: parcela 1 com 7 dias; parcela 2 com 14 dias; parcela 3 com 21 dias.
+
+10. FormasPagamento
+ID             — INT — PK.
+Descricao      — VARCHAR(50) UNIQUE — Boleto bancário, Pix, cartão de crédito, cartão de débito ou dinheiro.
+Ativo          — BOOLEAN — Disponível para seleção em novas parcelas.
+
+A forma de pagamento não define o prazo. O prazo pertence à condição de pagamento.
+
+11. PedidoGeral
+ID                       — INT — PK.
+IdentificadorEnvio       — CHAR(36) UNIQUE — Identificador gerado no Mobile para impedir duplicidade.
+ID_Vendedor              — INT — FK de Vendedores; autor do lote.
+DataHoraCriacao          — DATETIME — Início da montagem local.
+DataHoraRecebimento      — DATETIME — Momento em que a API aceitou o lote.
+DataHoraProcessamento    — DATETIME NULL — Confirmação ou cancelamento pela loja.
+ID_Administrador         — INT NULL — FK de Administradores; responsável pelo processamento.
+Status                   — VARCHAR(30) — AguardandoConfirmacao, Processado ou Cancelado.
+MotivoCancelamento       — VARCHAR(255) NULL — Obrigatório quando cancelado.
+
+O total solicitado e o total atendido do lote serão obtidos pela soma dos pedidos associados; não será necessária uma tabela intermediária entre PedidoGeral e Pedidos. Enquanto o lote estiver pendente, seu total atendido será apresentado como ainda não definido. DataHoraProcessamento e ID_Administrador serão obrigatórios quando o lote ficar Processado ou Cancelado.
+
+12. Pedidos
+ID                       — INT — PK.
+ID_PedidoGeral           — INT — FK de PedidoGeral.
+ID_Cliente               — INT — FK de Clientes.
+ID_CondicaoPagamento     — INT — FK de CondicoesPagamento.
+DataHoraCriacao          — DATETIME — Criação do pedido individual.
+ValorTotalSolicitado     — DECIMAL(12,2) — Soma dos subtotais solicitados aceitos no envio.
+ValorTotalAtendido       — DECIMAL(12,2) NULL — Soma dos subtotais atendidos após processamento.
+Status                   — VARCHAR(30) — Pendente, Confirmado, ConfirmadoComCorte, NaoAtendido ou Cancelado.
+Restrição proposta: UNIQUE (ID_PedidoGeral, ID_Cliente).
+
+O vendedor de origem será identificado pelo PedidoGeral, preservando a autoria histórica. ValorTotalAtendido ficará nulo em pedidos pendentes ou cancelados e será zero nos pedidos NaoAtendido.
+
+13. ItemPedido
+ID                       — INT — PK.
+ID_Pedido                — INT — FK de Pedidos.
+ID_Produto               — INT — FK de Produtos.
+NomeProduto              — VARCHAR(100) — Nome preservado no recebimento do pedido.
+QuantidadeSolicitada     — INT — Quantidade originalmente solicitada.
+QuantidadeAtendida       — INT NULL — Quantidade aprovada após o corte, incluindo zero.
+PrecoUnitario            — DECIMAL(12,2) — Preço validado e preservado no recebimento.
+SubtotalSolicitado       — DECIMAL(12,2) — QuantidadeSolicitada multiplicada pelo PrecoUnitario.
+SubtotalAtendido         — DECIMAL(12,2) NULL — QuantidadeAtendida multiplicada pelo PrecoUnitario.
+Restrição: UNIQUE (ID_Pedido, ID_Produto).
+
+QuantidadeAtendida e SubtotalAtendido ficarão nulos enquanto o pedido estiver pendente ou cancelado. A quantidade cortada será calculada, sem um campo redundante.
+
+14. ParcelasPedido
+ID                       — INT — PK.
+ID_Pedido                — INT — FK de Pedidos.
+NumeroParcela            — INT — Ordem da parcela.
+DiasAposConfirmacao      — INT — Prazo copiado da condição escolhida.
+ID_FormaPagamento        — INT — FK de FormasPagamento; escolha independente para esta parcela, permitindo formas diferentes entre as parcelas do mesmo pedido.
+ValorPrevisto            — DECIMAL(12,2) — Parte do total solicitado, antes do corte.
+Restrição: UNIQUE (ID_Pedido, NumeroParcela).
+
+A API validará quantidade, ordem e prazos das parcelas conforme a condição escolhida. As datas de vencimento somente serão definidas na confirmação da venda. O prazo copiado e o valor previsto preservarão o planejamento original.
+
+15. Vendas
+ID                       — INT — PK.
+ID_Pedido                — INT UNIQUE — FK de Pedidos; no máximo uma venda por pedido.
+DataHoraConfirmacao      — DATETIME — Momento de confirmação pela loja.
+ValorTotal               — DECIMAL(12,2) — Total final dos itens atendidos.
+
+Cliente, vendedor, condição e administrador responsável serão obtidos pelos vínculos com o pedido e seu PedidoGeral, sem repetir essas FKs nesta tabela. Venda somente existirá para pedido com atendimento positivo.
+
+16. ItemVenda
+ID                       — INT — PK.
+ID_Venda                 — INT — FK de Vendas.
+ID_ItemPedido            — INT UNIQUE — FK de ItemPedido; origem do item atendido.
+ID_Produto               — INT — FK de Produtos.
+NomeProduto              — VARCHAR(100) — Nome histórico copiado do pedido.
+Quantidade               — INT — Quantidade efetivamente vendida; maior que zero.
+PrecoUnitario            — DECIMAL(12,2) — Mesmo preço preservado no item do pedido.
+Subtotal                 — DECIMAL(12,2) — Quantidade multiplicada pelo PrecoUnitario.
+Restrição: UNIQUE (ID_Venda, ID_Produto).
+
+O item de origem deverá pertencer ao mesmo pedido da venda e ao mesmo produto. Os valores serão copiados do resultado confirmado e permanecerão imutáveis.
+
+17. ContasReceber
+ID                       — INT — PK.
+ID_Venda                 — INT — FK de Vendas.
+ID_ParcelaPedido         — INT UNIQUE — FK de ParcelasPedido; no máximo uma conta por parcela.
+DataVencimento           — DATE — Data da confirmação mais o prazo da parcela.
+Valor                    — DECIMAL(12,2) — Valor final após o corte; maior que zero.
+Status                   — VARCHAR(15) — Pendente ou Paga.
+DataPagamento            — DATE NULL — Preenchida no registro do recebimento integral.
+ID_AdministradorBaixa   — INT NULL — FK de Administradores; responsável pelo recebimento.
+
+Número da parcela e forma de pagamento serão obtidos de ParcelasPedido. O pedido da parcela deverá ser o mesmo pedido da venda. A soma das contas deverá corresponder exatamente ao total da venda.
+Status Paga exigirá DataPagamento e ID_AdministradorBaixa preenchidos; em Pendente, ambos permanecerão nulos.
+
+
+ARMAZENAMENTO LOCAL — SQLITE
+
+O SQLite terá cópias dos dados necessários ao vendedor autenticado: clientes, localidades, produtos, categorias, condições e formas de pagamento, pedidos sincronizados e respectivos resultados.
+
+Também armazenará o PedidoGeral em montagem, os pedidos individuais, itens, parcelas previstas e o carrinho em edição. Esses rascunhos não existirão no MySQL antes do envio.
+
+Os identificadores locais serão distintos dos identificadores do MySQL. Após o recebimento, a API retornará os identificadores oficiais para associação local, preservando o IdentificadorEnvio do lote.
+
+A sincronização deverá manter separados os rascunhos e os registros já enviados. Atualizar o catálogo não poderá alterar silenciosamente preços dos rascunhos; divergências serão apresentadas antes do envio.
+
+Ao abrir ou retomar o aplicativo com sessão válida, e ao solicitar atualização manual, o Mobile tentará atualizar os dados pela API. Uma consulta periódica enquanto o aplicativo estiver aberto poderá ser definida na implementação, sem exigir sincronização em segundo plano nesta etapa.
+
+
+LIMITES E DECISÕES PARA VALIDAÇÃO
+
+1. Um único PedidoGeral em montagem por vendedor e um pedido por cliente dentro desse lote.
+2. Corte proporcional à demanda de cada cliente, com distribuição dos restos e desempate pelo menor ID_Cliente.
+3. Rateio restrito a cada lote, utilizando o estoque na ordem de confirmação pela loja.
+4. Dias corridos contados da confirmação da venda e divisão igual do valor, com ajuste de centavos na última parcela.
+5. Confirmação ou cancelamento do lote inteiro, sem confirmação individual ou mudança manual no rateio.
+6. Contas a receber com baixa integral de cada parcela. Recebimentos parciais, juros, devoluções e estornos de vendas confirmadas ficam fora desta primeira versão.

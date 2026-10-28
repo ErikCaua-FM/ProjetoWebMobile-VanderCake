@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<views:PaginaBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:VanderCake.Views" xmlns:models="clr-namespace:VanderCake.Models" x:Class="VanderCake.Views.frmInicial" x:Name="Pagina" Title="VanderCake" x:DataType="views:frmInicial">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="18,8,18,16" RowSpacing="10">
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{StaticResource Primary}"/>
+            <Label Text="{Binding Erro}" IsVisible="{Binding TemErro}" TextColor="#A61925" BackgroundColor="#FFF0F1" Padding="10"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" IsEnabled="{Binding Livre}">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="18">
+                <Label Text="VanderCake" Style="{StaticResource Heading}" HorizontalOptions="Center"/>
+                <Label Text="Preparando sua carteira..." HorizontalOptions="Center"/>
+                <Button Text="Tentar novamente" Clicked="OnTentar" IsVisible="{Binding TemErro}"/>
+            </VerticalStackLayout>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" IsEnabled="{Binding Livre}" Spacing="8">
+
+        </VerticalStackLayout>
+    </Grid>
+</views:PaginaBase>

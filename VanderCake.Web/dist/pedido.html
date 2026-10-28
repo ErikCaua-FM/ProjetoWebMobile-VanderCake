@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#EA1D2C">
+    <meta name="description" content="VanderCake: gestão de vendas, produtos e carteiras de clientes.">
+    <title>Detalhes do pedido | VanderCake</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/pedido.js"></script>
+</head>
+<body >
+    <a class="pular" href="#principal">Pular para o conteúdo</a>
+    <header id="cabecalho" class="cabecalho"></header>
+    <main id="principal" class="container">
+        <a class="voltar" href="index.html">← Voltar ao painel</a>
+        <div class="apresentacao"><div><p class="sobretitulo">REVISÃO DO ENVIO</p><h1 id="titulo-pagina">Detalhes do pedido</h1><p id="subtitulo-pedido" class="muted">Carregando informações…</p></div><div class="apresentacao-acoes"><span data-modo class="ambiente"></span><button id="atualizar" class="botao secundario pequeno">↻ Atualizar</button></div></div>
+        <p id="mensagem" class="mensagem" role="status" hidden></p>
+        <div id="conteudo-pedido" hidden><div id="aviso-pedido" class="aviso" hidden></div><div class="detalhes-grid"><div id="pedidos-clientes" class="pedidos-clientes"></div><aside class="card resumo-pedido" id="resumo-pedido" aria-label="Resumo do Pedido Geral"></aside></div>
+        <section id="acoes-pedido" class="card barra-confirmacao" hidden><div><strong>Confira o envio completo</strong><p class="muted">A confirmação considera todos os clientes deste Pedido Geral.</p></div><div class="acoes"><button id="cancelar" class="botao secundario perigo-texto">Cancelar</button><button id="confirmar" class="botao">Confirmar</button></div></section></div>
+    </main>
+    <footer class="rodape"><span>VanderCake <span class="muted">· Gestão comercial</span></span><span data-demo>Dados fictícios · Demonstração neste navegador</span></footer>
+    <noscript>Ative o JavaScript para utilizar o VanderCake.</noscript>
+</body>
+</html>

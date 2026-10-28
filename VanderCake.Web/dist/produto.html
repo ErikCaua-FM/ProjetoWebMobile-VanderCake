@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#EA1D2C">
+    <meta name="description" content="VanderCake: gestão de vendas, produtos e carteiras de clientes.">
+    <title>Incluir produto | VanderCake</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/cadastro.js"></script>
+</head>
+<body data-cadastro="produtos">
+    <a class="pular" href="#principal">Pular para o conteúdo</a>
+    <header id="cabecalho" class="cabecalho"></header>
+    <main id="principal" class="container">
+        <a class="voltar" href="index.html">← Voltar ao painel</a><div class="apresentacao"><div><p class="sobretitulo">CADASTROS DA LOJA</p><h1 id="titulo-pagina">Incluir produto</h1><p class="muted">Mantenha seu catálogo pronto para novos pedidos.</p></div><span class="ambiente" data-modo></span></div>
+        <p id="mensagem" class="mensagem" role="status" hidden></p>
+        <form id="form-cadastro" class="formulario"><fieldset id="campos" disabled><section class="card formulario-card"><div class="titulo-secao"><span>01</span><div><h2>Informações do produto</h2><p>Dados que os vendedores verão no catálogo.</p></div></div><div class="campos-grid"><label class="campo" for="nome">Nome do produto<input id="nome" name="nome" type="text" required maxlength=100  placeholder="Ex.: Farinha de trigo · 25 kg"></label><div class="campo"><label for="categoria">Categoria / grupo</label><div class="picker-linha"><select id="categoria" name="categoria" required><option value="">Selecione</option></select><button type="button" class="botao secundario pequeno" id="nova-categoria">Nova Categoria+</button></div></div><label class="campo" for="preco">Preço unitário (R$)<input id="preco" name="preco" type="text" required maxlength=15 inputmode="decimal" placeholder="0,00"></label><label class="campo" for="estoque">Estoque (unidades)<input id="estoque" name="estoque" type="number" required  min="0" max="2147483647" step="1" placeholder="0"></label><label class="campo coluna-inteira" for="descricao">Descrição <span class="opcional">opcional</span><textarea id="descricao" name="descricao" rows="4" maxlength="4000" placeholder="Descreva o produto"></textarea></label>
+            <label class="checkbox coluna-inteira" id="linha-ativo" hidden><input type="checkbox" id="ativo" checked> Produto ativo no catálogo</label></div></section><div class="rodape-formulario"><button type="button" data-voltar class="botao secundario">Voltar</button><button id="salvar" type="submit" class="botao">Salvar cadastro</button></div></fieldset></form>
+    </main>
+    <footer class="rodape"><span>VanderCake <span class="muted">· Gestão comercial</span></span><span data-demo>Dados fictícios · Demonstração neste navegador</span></footer>
+    <noscript>Ative o JavaScript para utilizar o VanderCake.</noscript>
+</body>
+</html>

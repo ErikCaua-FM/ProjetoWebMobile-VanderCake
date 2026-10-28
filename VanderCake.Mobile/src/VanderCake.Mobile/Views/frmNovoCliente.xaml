@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<views:PaginaBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:VanderCake.Views" xmlns:models="clr-namespace:VanderCake.Models" x:Class="VanderCake.Views.frmNovoCliente" x:Name="Pagina" Title="Novo cliente" x:DataType="views:frmNovoCliente">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="18,8,18,16" RowSpacing="10">
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{StaticResource Primary}"/>
+            <Label Text="{Binding Erro}" IsVisible="{Binding TemErro}" TextColor="#A61925" BackgroundColor="#FFF0F1" Padding="10"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" IsEnabled="{Binding Livre}">
+            <ScrollView>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Novo cliente" Style="{StaticResource Heading}"/>
+                    <Label Text="O cadastro ficará associado à sua carteira." Style="{StaticResource MutedLabel}"/>
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Nome / Razão Social"/>
+                            <Entry x:Name="NomeEntry" Keyboard="Default" MaxLength="100"/>
+                            <Label Text="CPF / CNPJ"/>
+                            <Entry x:Name="DocumentoEntry" Keyboard="Numeric" MaxLength="20"/>
+                            <Label Text="Telefone com DDD"/>
+                            <Entry x:Name="TelefoneEntry" Keyboard="Telephone" MaxLength="20"/>
+                            <Label Text="E-mail (opcional)"/>
+                            <Entry x:Name="EmailEntry" Keyboard="Email" MaxLength="150"/>
+                            <Label Text="CEP"/>
+                            <Entry x:Name="CepEntry" Keyboard="Numeric" MaxLength="9"/>
+                            <Label Text="Rua / Logradouro"/>
+                            <Entry x:Name="RuaEntry" Keyboard="Default" MaxLength="100"/>
+                            <Label Text="Número"/>
+                            <Entry x:Name="NumeroEntry" Keyboard="Default" MaxLength="10"/>
+                            <Label Text="Bairro"/>
+                            <Entry x:Name="BairroEntry" Keyboard="Default" MaxLength="60"/>
+                            <Label Text="Estado"/>
+                            <Picker x:Name="EstadoPicker" Title="Selecione o estado" ItemDisplayBinding="{Binding Uf, x:DataType=models:Estado}" SelectedIndexChanged="OnEstado"/>
+                            <Label Text="Cidade"/>
+                            <Picker x:Name="CidadePicker" Title="Selecione a cidade" ItemDisplayBinding="{Binding Nome, x:DataType=models:Cidade}"/>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Button Text="Atualizar cidades e estados" Clicked="OnAtualizar" Style="{StaticResource Secondary}"/>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" IsEnabled="{Binding Livre}" Spacing="8">
+            <Button Text="Cadastrar cliente" Clicked="OnSalvar"/>
+        </VerticalStackLayout>
+    </Grid>
+</views:PaginaBase>

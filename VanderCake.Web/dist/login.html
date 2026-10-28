@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#EA1D2C">
+    <title>Entrar na loja | VanderCake</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/estilos.css">
+    <script type="module" src="js/login.js"></script>
+</head>
+<body class="pagina-login">
+    <main class="login-grid">
+        <section class="login-marca">
+            <a class="marca" href="login.html"><img src="favicon.svg" width="36" height="36" alt=""><span>Vander<span class="marca-forte">Cake</span></span></a>
+            <div class="login-intro"><p class="sobretitulo">DA SUA LOJA PARA CADA CLIENTE</p><h1>Bons negócios.<br>Todos os dias<span class="cor-primaria">.</span></h1><p>Mais organização para sua equipe.<br>Mais cuidado com cada pedido.</p>
+                <div class="ilustracao-pedido" aria-hidden="true"><div class="decor-cabecalho"><span class="decor-icon">✓</span><div><strong>Tudo pronto para o próximo pedido</strong><small>VanderCake · Gestão da loja</small></div><span class="decor-ponto"></span></div>
+                <div class="decor-linha"><span class="decor-produto">01</span><div><b>Da carteira à venda confirmada</b><small>Clientes, produtos e equipe em um só lugar.</small></div></div>
+                <div class="decor-progresso"><i></i><i></i><i></i><i></i></div><div class="decor-rodape"><span>Uma rotina mais simples</span><b>É por aqui →</b></div></div>
+            </div>
+            <p class="login-rodape">Distribuição para panificadoras e confeitarias.</p>
+        </section>
+        <section class="login-formulario">
+            <div class="login-conteudo"><span class="ambiente" data-demo>Demonstração local</span><h2>Bem-vindo à sua loja</h2><p class="muted">Entre com sua conta de administrador.</p>
+                <p id="mensagem" class="mensagem" role="status" hidden></p>
+                <form id="form-login"><fieldset id="campos">
+                    <label class="campo" for="email">E-mail<input id="email" name="email" type="email" required maxlength="150" autocomplete="username" placeholder="Seu e-mail de acesso"></label>
+                    <label class="campo" for="senha">Senha<span class="senha-campo"><input id="senha" name="senha" type="password" required maxlength="128" autocomplete="current-password" placeholder="Sua senha"><button id="ver-senha" type="button" aria-pressed="false">Mostrar</button></span></label>
+                    <button id="entrar" class="botao largura-total" type="submit">Entrar na loja</button>
+                </fieldset></form>
+                <div class="acesso-demo" data-demo><div><strong>Explore a demonstração</strong><p>Dados fictícios salvos apenas neste navegador.</p></div><dl><dt>E-mail</dt><dd>admin@vandercake.local</dd><dt>Senha</dt><dd>VanderCake123!</dd></dl><button type="button" id="preencher-demo" class="botao secundario largura-total">Preencher acesso de teste</button><button type="button" id="reiniciar-demo" class="link discreto">Reiniciar demonstração</button></div>
+                <p class="nota-login">Acesso exclusivo à administração VanderCake.</p>
+            </div>
+        </section>
+    </main>
+    <noscript>Ative o JavaScript para utilizar o VanderCake.</noscript>
+</body>
+</html>

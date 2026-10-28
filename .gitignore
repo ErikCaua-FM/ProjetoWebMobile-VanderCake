@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+**/node_modules/
+.vs/
+**/*.user
+**/*.db3
+**/*.sqlite
+**/*.sqlite-*
+**/ApiKeys/
+**/appsettings.Local.json

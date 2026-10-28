@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<views:PaginaBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:VanderCake.Views" xmlns:models="clr-namespace:VanderCake.Models" x:Class="VanderCake.Views.frmCarrinho" x:Name="Pagina" Title="Carrinho" x:DataType="views:frmCarrinho">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="18,8,18,16" RowSpacing="10">
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{StaticResource Primary}"/>
+            <Label Text="{Binding Erro}" IsVisible="{Binding TemErro}" TextColor="#A61925" BackgroundColor="#FFF0F1" Padding="10"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" IsEnabled="{Binding Livre}">
+            <ScrollView>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Pedido do cliente" Style="{StaticResource Heading}"/>
+                    <Label x:Name="ClienteLabel" FontFamily="OpenSansSemibold"/>
+                    <VerticalStackLayout x:Name="ItensLayout">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:ItemPedido">
+                                <Border Style="{StaticResource Card}">
+                                    <VerticalStackLayout Spacing="8">
+                                        <Label Text="{Binding NomeProduto}" FontFamily="OpenSansSemibold" FontSize="17"/>
+                                        <Label Text="{Binding PrecoTexto, StringFormat='Preço unitário: {0}'}" Style="{StaticResource MutedLabel}"/>
+                                        <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto" ColumnSpacing="10">
+                                            <Button Text="−" Style="{StaticResource Secondary}" WidthRequest="44" CommandParameter="{Binding .}" Clicked="OnDiminuir"/>
+                                            <Label Grid.Column="1" Text="{Binding QuantidadeTexto}" VerticalOptions="Center"/>
+                                            <Button Grid.Column="2" Text="+" Style="{StaticResource Secondary}" WidthRequest="44" CommandParameter="{Binding .}" Clicked="OnAumentar"/>
+                                            <Label Grid.Column="4" Text="{Binding SubtotalTexto}" FontFamily="OpenSansSemibold" VerticalOptions="Center"/>
+                                        </Grid>
+                                        <Button Text="Remover item" Style="{StaticResource Secondary}" CommandParameter="{Binding .}" Clicked="OnRemover"/>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                    <Label x:Name="VazioLabel" Text="Seu carrinho está vazio. Volte ao catálogo para escolher produtos."/>
+                    <Button Text="Atualizar preços" Style="{StaticResource Secondary}" Clicked="OnPrecos"/>
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Condição de pagamento" FontFamily="OpenSansSemibold" FontSize="18"/>
+                            <Picker x:Name="CondicaoPicker" Title="Selecione a condição" ItemDisplayBinding="{Binding Descricao, x:DataType=models:CondicaoPagamento}" SelectedIndexChanged="OnCondicao"/>
+                            <Label Text="Escolha a forma de pagamento de cada parcela." Style="{StaticResource MutedLabel}"/>
+                            <VerticalStackLayout x:Name="ParcelasLayout" Spacing="12"/>
+                            <Label Text="Os valores são previstos. O prazo começa na confirmação da loja." Style="{StaticResource MutedLabel}"/>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Button Text="Descartar edição deste carrinho" Style="{StaticResource Secondary}" Clicked="OnDescartar"/>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" IsEnabled="{Binding Livre}" Spacing="8">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Total previsto" VerticalOptions="Center"/>
+                <Label x:Name="TotalLabel" Grid.Column="1" FontFamily="OpenSansSemibold" FontSize="23"/>
+            </Grid>
+            <Button Text="Acrescentar Pedido à Lista" Clicked="OnAcrescentar"/>
+        </VerticalStackLayout>
+    </Grid>
+</views:PaginaBase>

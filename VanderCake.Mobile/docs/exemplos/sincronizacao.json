@@ -1,0 +1,133 @@
+{
+    "vendedor": {
+        "id": 1,
+        "nome": "Vendedor de exemplo",
+        "email": "vendedor@empresa.com",
+        "ativo": true
+    },
+    "clientes": [
+        {
+            "id": 10,
+            "vendedorId": 1,
+            "nome": "Cliente de exemplo",
+            "documento": "DOCUMENTO_VALIDO_DO_CLIENTE",
+            "rua": "Rua de exemplo",
+            "bairro": "Centro",
+            "cep": "85851000",
+            "numero": "10",
+            "cidadeId": 1,
+            "cidadeNome": "Foz do Iguaçu",
+            "uf": "PR",
+            "telefone": "45999999999",
+            "email": null,
+            "ativo": true
+        }
+    ],
+    "estados": [
+        {
+            "id": 1,
+            "nome": "Paraná",
+            "uf": "PR"
+        }
+    ],
+    "cidades": [
+        {
+            "id": 1,
+            "estadoId": 1,
+            "nome": "Foz do Iguaçu"
+        }
+    ],
+    "categorias": [
+        {
+            "id": 1,
+            "nome": "Confeitaria",
+            "ativo": true
+        }
+    ],
+    "produtos": [
+        {
+            "id": 100,
+            "categoriaId": 1,
+            "nome": "Produto de exemplo",
+            "descricao": "Exemplo da estrutura do catálogo; não é um cadastro real.",
+            "preco": 10,
+            "estoque": 20,
+            "ativo": true
+        }
+    ],
+    "condicoesPagamento": [
+        {
+            "id": 1,
+            "descricao": "À vista",
+            "ativo": true,
+            "parcelas": [
+                {
+                    "numeroParcela": 1,
+                    "diasAposConfirmacao": 0
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "descricao": "7/14 dias",
+            "ativo": true,
+            "parcelas": [
+                {
+                    "numeroParcela": 1,
+                    "diasAposConfirmacao": 7
+                },
+                {
+                    "numeroParcela": 2,
+                    "diasAposConfirmacao": 14
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "descricao": "7/14/21 dias",
+            "ativo": true,
+            "parcelas": [
+                {
+                    "numeroParcela": 1,
+                    "diasAposConfirmacao": 7
+                },
+                {
+                    "numeroParcela": 2,
+                    "diasAposConfirmacao": 14
+                },
+                {
+                    "numeroParcela": 3,
+                    "diasAposConfirmacao": 21
+                }
+            ]
+        }
+    ],
+    "formasPagamento": [
+        {
+            "id": 1,
+            "descricao": "Pix",
+            "ativo": true
+        },
+        {
+            "id": 2,
+            "descricao": "Boleto bancário",
+            "ativo": true
+        },
+        {
+            "id": 3,
+            "descricao": "Dinheiro em espécie",
+            "ativo": true
+        },
+        {
+            "id": 4,
+            "descricao": "Cartão de crédito",
+            "ativo": true
+        },
+        {
+            "id": 5,
+            "descricao": "Cartão de débito",
+            "ativo": true
+        }
+    ],
+    "pedidosGerais": []
+}

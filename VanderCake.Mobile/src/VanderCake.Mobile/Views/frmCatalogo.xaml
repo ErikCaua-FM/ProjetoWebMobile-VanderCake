@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<views:PaginaBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:VanderCake.Views" xmlns:models="clr-namespace:VanderCake.Models" x:Class="VanderCake.Views.frmCatalogo" x:Name="Pagina" Title="Catálogo" x:DataType="views:frmCatalogo">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Carrinho" Clicked="OnCarrinho"/>
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,*,Auto" Padding="18,8,18,16" RowSpacing="10">
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" Color="{StaticResource Primary}"/>
+            <Label Text="{Binding Erro}" IsVisible="{Binding TemErro}" TextColor="#A61925" BackgroundColor="#FFF0F1" Padding="10"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" IsEnabled="{Binding Livre}">
+            <Grid RowDefinitions="Auto,Auto,Auto,*" RowSpacing="8">
+                <VerticalStackLayout>
+                    <Label x:Name="ClienteLabel" FontFamily="OpenSansSemibold"/>
+                    <Label Text="O estoque é informativo. A loja confirmará as quantidades." Style="{StaticResource MutedLabel}"/>
+                </VerticalStackLayout>
+                <SearchBar Grid.Row="1" Placeholder="Pesquisar produto" TextChanged="OnPesquisar"/>
+                <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <Picker x:Name="CategoriasPicker" Title="Categoria" ItemDisplayBinding="{Binding Nome, x:DataType=models:Categoria}" SelectedIndexChanged="OnCategoria"/>
+                    <Button Grid.Column="1" Text="Atualizar" Style="{StaticResource Secondary}" Clicked="OnAtualizar"/>
+                </Grid>
+                <CollectionView x:Name="ProdutosView" Grid.Row="3" SelectionMode="None">
+                    <CollectionView.Header>
+                        <Border x:Name="ComprarNovamenteCard" Style="{StaticResource Card}" IsVisible="False">
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="Comprar novamente" FontFamily="OpenSansSemibold" FontSize="20"/>
+                                <Label x:Name="UltimoPedidoLabel" Style="{StaticResource MutedLabel}"/>
+                                <VerticalStackLayout x:Name="UltimoPedidoItensLayout" Spacing="6">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:ItemPedido">
+                                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                                <Label Text="{Binding NomeProduto}"/>
+                                                <Label Grid.Column="1" Text="{Binding QuantidadeTexto}" FontFamily="OpenSansSemibold"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Label Text="Repete as quantidades solicitadas com os preços do catálogo atual. Selecione o pagamento no carrinho." Style="{StaticResource MutedLabel}"/>
+                                <Button Text="Comprar novamente" Clicked="OnComprarNovamente"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </CollectionView.Header>
+                    <CollectionView.EmptyView>
+                        <Label Text="Nenhum produto encontrado. Atualize o catálogo pela API." Padding="16"/>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Produto">
+                            <Border Style="{StaticResource Card}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnProduto" CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+                                <VerticalStackLayout Spacing="7">
+                                    <Label Text="{Binding Nome}" FontFamily="OpenSansSemibold" FontSize="18"/>
+                                    <Label Text="{Binding Descricao}" MaxLines="3" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding EstoqueTexto}" Style="{StaticResource MutedLabel}"/>
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Text="{Binding PrecoTexto}" FontSize="20" FontFamily="OpenSansSemibold" VerticalOptions="Center"/>
+                                        <Button Grid.Column="1" Text="Adicionar +" CommandParameter="{Binding .}" Clicked="OnAdicionar"/>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" IsEnabled="{Binding Livre}" Spacing="8">
+            <Button x:Name="CarrinhoButton" Text="Ver carrinho" Clicked="OnCarrinho"/>
+        </VerticalStackLayout>
+    </Grid>
+</views:PaginaBase>

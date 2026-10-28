@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="../VanderCake.Api/VanderCake.Api.csproj" />
+        <Compile Include="../VanderCake.Mobile/src/VanderCake.Mobile/Models/**/*.cs" Link="Mobile/Models/%(Filename)%(Extension)" />
+        <Compile Include="../VanderCake.Mobile/src/VanderCake.Mobile/Contracts/**/*.cs" Link="Mobile/Contracts/%(Filename)%(Extension)" />
+        <Compile Include="../VanderCake.Mobile/src/VanderCake.Mobile/Rules/**/*.cs" Link="Mobile/Rules/%(Filename)%(Extension)" />
+        <Compile Include="../VanderCake.Mobile/src/VanderCake.Mobile/Data/**/*.cs" Link="Mobile/Data/%(Filename)%(Extension)" />
+        <Compile Include="../VanderCake.Mobile/src/VanderCake.Mobile/Services/*.cs" Exclude="../VanderCake.Mobile/src/VanderCake.Mobile/Services/SecureStorageSessao.cs" Link="Mobile/Services/%(Filename)%(Extension)" />
+        <Compile Include="../VanderCake.Mobile/src/VanderCake.Mobile/Helpers/ApiException.cs" Link="Mobile/Helpers/ApiException.cs" />
+        <Compile Include="../VanderCake.Mobile/src/VanderCake.Mobile/Helpers/JsonDados.cs" Link="Mobile/Helpers/JsonDados.cs" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.14" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
+    </ItemGroup>
+</Project>
